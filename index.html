@@ -50,6 +50,7 @@
                     letter.update();
                     letter.shape.x = letter.x * settings.sts["LetterWidth"];
                     letter.shape.y = letter.y * (settings.sts["LetterHeight"] + settings.sts["LineSpace"]);
+                    //letter.shate.cache(0,0,settings.sts["LetterWidth"],settings.sts["LetterHeight"])
                 }
             }
             
@@ -159,11 +160,30 @@
                 //console.log(e.keyCode);
                 
                 //if( settings.colors.indexOf(e.keyCode) !== -1 ){
+                
+                console.log(cursorPosX + " " + cursorPosY);
+                
+                if( cursorPosY === settings.sts["PageSizeY"]-1 ){ // jezeli kursor w ostatniej lini
+                    // enter nie moze byc wcale
+                    if( e.keyCode === 13 ) //enter
+                    {
+                        e.preventDefault();
+                        return false;
+                    }
+                    if( cursorPosX === settings.sts["PageSizeX"] ){
+                        if( e.keyCode !== 8 ) // backspace dozwolony
+                        {
+                            e.preventDefault();
+                            return false;
+                        }
+                    }
+                }
+                    
                 if( settings.colors[e.keyCode] !== undefined ){
                     var letter = new Letter(cursorPosX,cursorPosY,e.keyCode);
                     stage.addChild(letter.shape);
                     letters.push(letter);
-                    if( cursorPosX === settings.sts["PageSizeX"]-1){
+                    if( cursorPosX === settings.sts["PageSizeX"]-1 && cursorPosY !== settings.sts["PageSizeY"]-1){
                         cursorPosX = 0;
                         cursorPosY++;
                     }
@@ -171,16 +191,21 @@
                     {
                         cursorPosX++;
                     }
-                    //console.log(cursorPosX + " " + cursorPosY + " " + settings.sts["PageSizeX"]);
+                    
                     
                     refreshAll();
                 }
                 
                 if( e.keyCode === 8 ){
                     if( letters.length > 0 ){
-                        stage.removeChild(letters[letters.length-1].shape);
+                        var lastLetter = letters[letters.length-1];
+                        cursorPosX = lastLetter.x;
+                        cursorPosY = lastLetter.y;
+                        
+                        stage.removeChild(lastLetter.shape);
                         letters.pop();                        
-                        cursorPosX--;
+                        //cursorPosX--;
+                        
                         refreshAll();
                     }
                 }
@@ -192,8 +217,8 @@
                 
                 if( e.keyCode === 13 ) //enter
                 {
+                    if( cursorPosX !== 0 ) cursorPosY++;
                     cursorPosX = 0;
-                    cursorPosY++;
                 }
                 
                 //console.log(e.keyCode);

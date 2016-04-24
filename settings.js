@@ -8,7 +8,7 @@ class Settings{
     constructor(){
         this.sts = [];
         this.sts["PageSizeX"] = 20;
-        this.sts["PageSizeY"] = 70;
+        this.sts["PageSizeY"] = 10;
         this.sts["LineSpace"] = 0;
         this.sts["LetterSpace"] = 0;
         this.sts["LetterWidth"] = 10;
@@ -26,7 +26,8 @@ class Settings{
         //var KEYCODE_SPACE = 32;		//useful keycode
         //this.colors[13] = '';
         this.colors[32] = '#ffffff'
-                
+        this.colors[13] = '#ff0000'
+        
 //        this.PageSizeX = 50;
 //        this.PageSizeY = 70;
 //        this.LineSpace = 0;
