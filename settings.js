@@ -11,8 +11,8 @@ class Settings{
         this.sts["PageSizeY"] = 70;
         this.sts["LineSpace"] = 0;
         this.sts["LetterSpace"] = 0;
-        this.sts["LetterWidth"] = 50;
-        this.sts["LetterHeight"] = 50;        
+        this.sts["LetterWidth"] = 10;
+        this.sts["LetterHeight"] = 15;        
         
 //        this.PageSizeX = 50;
 //        this.PageSizeY = 70;

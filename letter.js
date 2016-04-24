@@ -4,9 +4,13 @@
  * and open the template in the editor.
  */
 
-function Letter() {
+function Letter(x,y) {
+    this.colors = ["#828b20", "#b0ac31", "#cbc53d", "#fad779", "#f9e4ad", "#faf2db", "#563512", "#9b4a0b", "#d36600", "#fe8a00", "#f9a71f"];
+                
     this.shape = new createjs.Shape();
-    this.shape.graphics.beginFill("#ff0").drawRect(0, 0, 50, 50);
+    this.shape.graphics.beginFill(this.colors[Math.random() * this.colors.length | 0]).drawRect(0, 0, settings.sts["LetterWidth"], settings.sts["LetterHeight"]);
+    this.x = x;
+    this.y = y;
     //this.shape.x = posx;
     //this.shape.y = posy;
     //this.lifeTime = 0;
@@ -14,6 +18,12 @@ function Letter() {
 
 Letter.prototype.getSth = function(sth){
     return sth * 3;
+};
+
+Letter.prototype.update = function(){
+    this.shape.graphics.clear();
+    this.shape.graphics.beginFill(this.colors[Math.random() * this.colors.length | 0]).drawRect(0, 0, settings.sts["LetterWidth"], settings.sts["LetterHeight"]);
+    console.log('asdf');
 };
 
 class Letter2{

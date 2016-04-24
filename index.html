@@ -24,7 +24,7 @@
             var preload;
             var canvas, stage;
             //var drawingCanvas;
-            var letter;
+            var letters = new Array();
 
             function onOff(wonoff) {
                 console.log(wonoff.attr('id'));
@@ -39,7 +39,16 @@
 
             function refreshAll(){
                 //console.log("refreshAll");
+                canvas.width = settings.sts["PageSizeX"] * settings.sts["LetterWidth"];
+                canvas.height = settings.sts["PageSizeY"] * (settings.sts["LetterHeight"] + settings.sts["LineSpace"]);
                 
+                for(var i = 0 ; i < letters.length ; ++i )
+                {
+                    var letter = letters[i];
+                    letter.update();
+                    letter.shape.x = letter.x * settings.sts["LetterWidth"];
+                    letter.shape.y = letter.y * (settings.sts["LetterHeight"] + settings.sts["LineSpace"]);
+                }
             }
             
             function init() {
@@ -94,9 +103,15 @@
 //                    //letter.uncache();
 //                }
 
-                letter = new Letter();
-                letter.shape.x = 100;
-                stage.addChild(letter.shape);
+                for( var x = 0 ; x < 10 ; ++x )
+                {
+                    for( var y = 0 ; y < 10 ; ++y )
+                    {
+                        var letter = new Letter(x,y);
+                        stage.addChild(letter.shape);
+                        letters.push(letter);
+                    }
+                }
 
                 fpsLabel = new createjs.Text("-- fps", "bold 18px Arial", "#000");
                 stage.addChild(fpsLabel);
@@ -108,6 +123,8 @@
 
                 //const square = new Letter2(10, 10);
                 fpsLabel.text = "aaa : " + settings.letterWidth;
+                
+                refreshAll();                
             }
 
             var fpsLabel;
