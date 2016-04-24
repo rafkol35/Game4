@@ -65,5 +65,18 @@ div#divCurrentText{
     text-align: right;
     border: 1px solid black;
 }
+table#tableNumbers{
+    float: left;
+}
+table#tableColors{
+    float: left;
+    margin-left: 10px;
+}
 
+div.clrsmp{
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border: 1px solid black;
+}
 /*settings*/

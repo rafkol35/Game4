@@ -9,6 +9,14 @@
         <script type="text/javascript" src="jquery-ui.min.js"></script>
 
         <script type="text/javascript" src="settings.js"></script>
+        
+        <link rel="stylesheet" media="screen" type="text/css" href="colorpicker/css/colorpicker.css" />
+        <script type="text/javascript" src="colorpicker/js/colorpicker.js"></script>
+        <script type="text/javascript" src="colorpicker/js/eye.js"></script>
+        <script type="text/javascript" src="colorpicker/js/utils.js"></script>
+        <script type="text/javascript" src="colorpicker/js/layout.js?ver=1.0.2"></script>
+
+    
         <script type="text/javascript" src="utils.js"></script>
 
         <script type="text/javascript" src="letter.js"></script>
@@ -29,7 +37,7 @@
             var cursorPosY = 0;
                     
             function onOff(wonoff) {
-                console.log(wonoff.attr('id'));
+                //console.log(wonoff.attr('id'));
 
                 panelGame.hide();
                 panelSettings.hide();
@@ -69,7 +77,7 @@
                     onOff(panelCurrentText);
                 });
 
-                onOff(panelGame);
+                onOff(panelSettings);
 
                 initSettings();
 
@@ -82,6 +90,8 @@
                 stage = new createjs.Stage(canvas);
                 //stage.autoClear = false;
                 stage.enableDOMEvents(true);
+
+                //$("#gameCanvas").css("background-color", "yellow");
 
                 createjs.Ticker.timingMode = createjs.Ticker.RAF;
                 createjs.Ticker.addEventListener("tick", updateScene);
@@ -161,7 +171,7 @@
                 
                 //if( settings.colors.indexOf(e.keyCode) !== -1 ){
                 
-                console.log(cursorPosX + " " + cursorPosY);
+                //console.log(cursorPosX + " " + cursorPosY);
                 
                 if( cursorPosY === settings.sts["PageSizeY"]-1 ){ // jezeli kursor w ostatniej lini
                     // enter nie moze byc wcale
@@ -191,8 +201,6 @@
                     {
                         cursorPosX++;
                     }
-                    
-                    
                     refreshAll();
                 }
                 
@@ -240,10 +248,10 @@
             </div>
 
             <div id="divGame">
-                <canvas id="gameCanvas" style="background-color: brown;" width="500" height="600"></canvas>
+                <canvas id="gameCanvas" style="background-color: white;" width="500" height="600"></canvas>
             </div>            
             <div id="divSettings">Settings<br />
-                <table>
+                <table id="tableNumbers">
                     <tr>
                         <td>Ilość znaków w linii: </td><td><input id="spinnerPageSizeX" name="value" value="100" class="settingsSpinner"></td>
                     </tr>
@@ -263,6 +271,45 @@
                         <td>Wysokość litery: </td><td> <input id="spinnerLetterHeight" name="value" value="50" class="settingsSpinner"></td>
                     </tr>
 
+                </table>
+
+                <table id="tableColors">
+                    <tr><td>Płótno</td><td><div id="clrsmpCanvas" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpickerCanvas" value="ffffff" /></td></tr>
+                    <tr><td>Spacja</td><td><div id="clrsmpSpace" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpickerSpace" value="ffffff" /></td></tr>
+                    
+                    <tr><td>A</td><td><div id="clrsmp65" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker65" value="ffffff" /></td></tr>
+                    <tr><td>B</td><td><div id="clrsmp66" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker66" value="ffffff" /></td></tr>
+                    <tr><td>C</td><td><div id="clrsmp67" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker67" value="ffffff" /></td></tr>
+                    <tr><td>D</td><td><div id="clrsmp68" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker68" value="ffffff" /></td></tr>                    
+                    
+                    <tr><td>E</td><td><div id="clrsmp69" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker69" value="ffffff" /></td></tr>
+                    <tr><td>F</td><td><div id="clrsmp70" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker70" value="ffffff" /></td></tr>
+                    <tr><td>G</td><td><div id="clrsmp71" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker71" value="ffffff" /></td></tr>
+                    <tr><td>H</td><td><div id="clrsmp72" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker72" value="ffffff" /></td></tr>
+                    
+                    <tr><td>I</td><td><div id="clrsmp73" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker73" value="ffffff" /></td></tr>
+                    <tr><td>J</td><td><div id="clrsmp74" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker74" value="ffffff" /></td></tr>
+                    <tr><td>K</td><td><div id="clrsmp75" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker75" value="ffffff" /></td></tr>
+                    <tr><td>L</td><td><div id="clrsmp76" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker76" value="ffffff" /></td></tr>
+                    
+                    <tr><td>M</td><td><div id="clrsmp77" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker77" value="ffffff" /></td></tr>
+                    <tr><td>N</td><td><div id="clrsmp78" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker78" value="ffffff" /></td></tr>
+                    <tr><td>O</td><td><div id="clrsmp79" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker79" value="ffffff" /></td></tr>
+                    <tr><td>P</td><td><div id="clrsmp80" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker80" value="ffffff" /></td></tr>
+                    
+                    <tr><td>Q</td><td><div id="clrsmp81" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker81" value="ffffff" /></td></tr>
+                    <tr><td>R</td><td><div id="clrsmp82" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker82" value="ffffff" /></td></tr>
+                    <tr><td>S</td><td><div id="clrsmp83" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker83" value="ffffff" /></td></tr>
+                    <tr><td>T</td><td><div id="clrsmp84" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker84" value="ffffff" /></td></tr>
+                    
+                    <tr><td>U</td><td><div id="clrsmp85" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker85" value="ffffff" /></td></tr>
+                    <tr><td>V</td><td><div id="clrsmp86" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker86" value="ffffff" /></td></tr>
+                    <tr><td>W</td><td><div id="clrsmp87" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker87" value="ffffff" /></td></tr>
+                    <tr><td>X</td><td><div id="clrsmp88" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker88" value="ffffff" /></td></tr>
+                    
+                    <tr><td>Y</td><td><div id="clrsmp89" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker89" value="ffffff" /></td></tr>
+                    <tr><td>Z</td><td><div id="clrsmp90" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker90" value="ffffff" /></td></tr>
+                    
                 </table>
             </div>
             <div id="divCurrentText">CurrentText</div>
