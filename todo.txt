@@ -1,10 +1,8 @@
 3) naprawic spinnery aby wpisanie tekstu tez dzialalo
 4) ograniczyc mozliwosc wstawiania liczby liter w pionie i poziomie (ta liczba musi sie sama wyliczac i dostosowywac sie bedzie canvas do maxsize)
-5) okno wyboru kolorów dla liter + gradienty automatyczne + spaca
+5) okno wyboru kolorów dla liter + gradienty automatyczne + spacja
 6) okno z akutalnym tekstem
-7) ustalenie koloru tła
 8) pseudo save
 9) naprawić wygląd
 10) reset wszystkiego ?
-11) randomizowe kolory
 12) zablokowac wstawianie liter jak nie jestem w grze itp...
