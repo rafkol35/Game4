@@ -54,6 +54,8 @@ div#divSettings{
 
 div#divCurrentText{
     background-color: yellowgreen;
+    text-align: center;
+    /*padding: 0px 20px;*/
 }
 
 
@@ -92,4 +94,15 @@ div.clrsmp{
     background-color: red;
     border: 1px solid black;
 }
+
+div#currentText{
+    border: 1px solid black;
+    padding: 5px;
+    font-family: monospace;
+    letter-spacing: 0px;
+    /*width: 400px;*/
+    margin: 20px;
+    text-align: left;
+}
+
 /*settings*/

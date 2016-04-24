@@ -1,5 +1,4 @@
 4) ograniczyc mozliwosc wstawiania liczby liter w pionie i poziomie (ta liczba musi sie sama wyliczac i dostosowywac sie bedzie canvas do maxsize)
-6) okno z akutalnym tekstem
 8) pseudo save
 9) naprawić wygląd
 10) reset wszystkiego ?

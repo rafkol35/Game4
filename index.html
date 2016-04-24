@@ -52,6 +52,10 @@
                 canvas.width = settings.sts["PageSizeX"] * settings.sts["LetterWidth"];
                 canvas.height = settings.sts["PageSizeY"] * (settings.sts["LetterHeight"] + settings.sts["LineSpace"]);
                 
+                $("#currentText").html("");
+                
+                var newLineCntr = 0;
+                var currentString = "";
                 for(var i = 0 ; i < letters.length ; ++i )
                 {
                     var letter = letters[i];
@@ -59,7 +63,24 @@
                     letter.shape.x = letter.x * settings.sts["LetterWidth"];
                     letter.shape.y = letter.y * (settings.sts["LetterHeight"] + settings.sts["LineSpace"]);
                     //letter.shate.cache(0,0,settings.sts["LetterWidth"],settings.sts["LetterHeight"])
+                    
+                    if( newLineCntr > 0 && (newLineCntr % settings.sts["PageSizeX"] === 0) ){
+                        $("#currentText").html( $("#currentText").html() + "<br />" );
+                        newLineCntr = 0;
+                    }
+                    
+                    if( letter.c === 13 ){
+                        //currentString += String.fromCharCode(letter.c);
+                        $("#currentText").html( $("#currentText").html() + "<br />" );
+                        newLineCntr = 0;
+                    }else{
+                        $("#currentText").html( $("#currentText").html() + String.fromCharCode(letter.c) );
+                        newLineCntr++;
+                    }
+                    
                 }
+                //$("#currentText").css("width",canvas.width);
+                //$("#currentText").html(currentString);
             }
             
             function init() {
@@ -247,6 +268,10 @@
                 refreshAll();
             }
             
+            function updateCurrentText(){
+                
+            }
+            
         </script>
 
     </head>
@@ -335,8 +360,11 @@
                 </table>
                 </div>
             </div>
-            <div id="divCurrentText">Tekst</div>
-
+            
+            <div id="divCurrentText">Tekst
+                <div id="currentText"></div>
+            </div>
+                
         </div>
     </body>
 </html>
