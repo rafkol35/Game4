@@ -6,14 +6,27 @@
 
 class Settings{
     constructor(){
-        this.sts = new Array();
-        this.sts["PageSizeX"] = 50;
+        this.sts = [];
+        this.sts["PageSizeX"] = 20;
         this.sts["PageSizeY"] = 70;
         this.sts["LineSpace"] = 0;
         this.sts["LetterSpace"] = 0;
         this.sts["LetterWidth"] = 10;
         this.sts["LetterHeight"] = 15;        
         
+        this.colors2 = ["#828b20", "#b0ac31", "#cbc53d", "#fad779", "#f9e4ad", "#faf2db", "#563512", "#9b4a0b", "#d36600", "#fe8a00", "#f9a71f"];
+    
+        this.colors = [];
+        for(var i = 65 ; i <= 90 ; ++i)
+        {
+            this.colors[i] = this.colors2[Math.random() * this.colors2.length | 0];
+        }
+        
+        //var KEYCODE_ENTER = 13;		//useful keycode
+        //var KEYCODE_SPACE = 32;		//useful keycode
+        //this.colors[13] = '';
+        this.colors[32] = '#ffffff'
+                
 //        this.PageSizeX = 50;
 //        this.PageSizeY = 70;
 //        this.LineSpace = 0;

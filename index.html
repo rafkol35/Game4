@@ -25,7 +25,9 @@
             var canvas, stage;
             //var drawingCanvas;
             var letters = new Array();
-
+            var cursorPosX = 0;
+            var cursorPosY = 0;
+                    
             function onOff(wonoff) {
                 console.log(wonoff.attr('id'));
 
@@ -66,7 +68,7 @@
                     onOff(panelCurrentText);
                 });
 
-                onOff(panelSettings);
+                onOff(panelGame);
 
                 initSettings();
 
@@ -103,31 +105,33 @@
 //                    //letter.uncache();
 //                }
 
-                for( var x = 0 ; x < 10 ; ++x )
-                {
-                    for( var y = 0 ; y < 10 ; ++y )
-                    {
-                        var letter = new Letter(x,y);
-                        stage.addChild(letter.shape);
-                        letters.push(letter);
-                    }
-                }
+//                for( var x = 0 ; x < 10 ; ++x )
+//                {
+//                    for( var y = 0 ; y < 10 ; ++y )
+//                    {
+//                        var letter = new Letter(x,y);
+//                        stage.addChild(letter.shape);
+//                        letters.push(letter);
+//                    }
+//                }
 
-                fpsLabel = new createjs.Text("-- fps", "bold 18px Arial", "#000");
-                stage.addChild(fpsLabel);
-                fpsLabel.x = 0;
-                fpsLabel.y = 0;
+//                fpsLabel = new createjs.Text("-- fps", "bold 18px Arial", "#000");
+//                stage.addChild(fpsLabel);
+//                fpsLabel.x = 0;
+//                fpsLabel.y = 0;
 
                 stage.update();
 
-
+                document.onkeydown = handleKeyDown;
+                //document.onkeyup = handleKeyUp;
+            
                 //const square = new Letter2(10, 10);
-                fpsLabel.text = "aaa : " + settings.letterWidth;
+                //fpsLabel.text = "aaa : " + settings.letterWidth;
                 
                 refreshAll();                
             }
 
-            var fpsLabel;
+            //var fpsLabel;
             var fps = 0;
             var lt;
 
@@ -144,6 +148,60 @@
                 stage.update();
             }
 
+            function handleKeyDown(e) {
+                //cross browser issues exist
+                if (!e) {
+                    var e = window.event;
+                }
+                  
+                //console.log(settings.colors.indexOf(e.keyCode));
+                //console.log(settings.colors[e.keyCode]);
+                //console.log(e.keyCode);
+                
+                //if( settings.colors.indexOf(e.keyCode) !== -1 ){
+                if( settings.colors[e.keyCode] !== undefined ){
+                    var letter = new Letter(cursorPosX,cursorPosY,e.keyCode);
+                    stage.addChild(letter.shape);
+                    letters.push(letter);
+                    if( cursorPosX === settings.sts["PageSizeX"]-1){
+                        cursorPosX = 0;
+                        cursorPosY++;
+                    }
+                    else
+                    {
+                        cursorPosX++;
+                    }
+                    //console.log(cursorPosX + " " + cursorPosY + " " + settings.sts["PageSizeX"]);
+                    
+                    refreshAll();
+                }
+                
+                if( e.keyCode === 8 ){
+                    if( letters.length > 0 ){
+                        stage.removeChild(letters[letters.length-1].shape);
+                        letters.pop();                        
+                        cursorPosX--;
+                        refreshAll();
+                    }
+                }
+                
+                if( e.keyCode === 32 || e.keyCode === 8){
+                    e.preventDefault();
+                    return false;
+                }
+                
+                if( e.keyCode === 13 ) //enter
+                {
+                    cursorPosX = 0;
+                    cursorPosY++;
+                }
+                
+                //console.log(e.keyCode);
+                
+//                switch (e.keyCode) {
+//                }
+            }
+            
         </script>
 
     </head>
