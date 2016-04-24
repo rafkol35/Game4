@@ -41,8 +41,8 @@ class Settings{
         this.colors = [];
         this.randomizeColors();
         
-        this.gradientFromColor = "#ff0000";
-        this.gradientToColor = "#00ff00";
+        this.gradientFromColor = "#000000";
+        this.gradientToColor = "#ffffff";
         
         //this.colors[65] = "#000000";
         //this.colors[66] = "#ffffff";
@@ -115,26 +115,26 @@ class Settings{
         var gFrom = from[1];
         var bFrom = from[2];
         
-        var rdiff = 0;
-        if( to[0] > from[0] ) rdiff = to[0] - from[0];
-        else{ 
-            rdiff = from[0] - to[0];
-            rFrom = to[0];
-        }
+        var rdiff = to[0] - from[0];
+//        if( to[0] > from[0] ) rdiff = to[0] - from[0];
+//        else{ 
+//            rdiff = from[0] - to[0];
+//            rFrom = to[0];
+//        }
         
-        var gdiff = 0;
-        if( to[1] > from[1] ) gdiff = to[1] - from[1];
-        else { 
-            gdiff = from[1] - to[1];
-            gFrom = to[1];
-        }
+        var gdiff = to[1] - from[1];
+//        if( to[1] > from[1] ) gdiff = to[1] - from[1];
+//        else { 
+//            gdiff = from[1] - to[1];
+//            gFrom = to[1];
+//        }
         
-        var bdiff = 0;
-        if( to[2] > from[2] ) bdiff = to[2] - from[2];
-        else {
-            bdiff = from[2] - to[2];
-            bFrom = to[2];
-        }
+        var bdiff = to[2] - from[2];
+//        if( to[2] > from[2] ) bdiff = to[2] - from[2];
+//        else {
+//            bdiff = from[2] - to[2];
+//            bFrom = to[2];
+//        }
         
         var rStep = rdiff / numColors;
         var gStep = gdiff / numColors;
@@ -143,7 +143,7 @@ class Settings{
         var cntr = 0;
         for(var i = 65 ; i <= 90 ; ++i)
         {
-            var rgbStr = "rgb(" + Math.ceil(rFrom + cntr*rStep) + "," + Math.ceil(gFrom + cntr*gStep) + "," + Math.ceil(bFrom + cntr*bStep) + ")";
+            var rgbStr = "rgb(" + Math.round(rFrom + cntr*rStep) + "," + Math.round(gFrom + cntr*gStep) + "," + Math.round(bFrom + cntr*bStep) + ")";
             //console.log( rgb2hex(rgbStr) );
             this.colors[i] = rgb2hex(rgbStr);
             //this.colors[i] = '#'+Math.floor(Math.random()*16777215).toString(16);
