@@ -52,7 +52,7 @@ class Settings{
         //var KEYCODE_SPACE = 32;		//useful keycode
         //this.colors[13] = '';
         this.colors[32] = '#ffffff';
-        this.colors[13] = '#ff0000';
+        this.colors[13] = this.canvasColor; //'#ff0000';
         
 //        this.PageSizeX = 50;
 //        this.PageSizeY = 70;
@@ -72,6 +72,7 @@ class Settings{
     canvasColorChange(newColor){
         //console.log('ccc');
         this.canvasColor = "#"+newColor;
+        this.colors[13] = this.canvasColor;
         $("#gameCanvas").css("background-color", this.canvasColor);
         $("#clrsmpCanvas").css("background-color", this.canvasColor);
         //refreshAll();
