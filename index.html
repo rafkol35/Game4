@@ -234,6 +234,16 @@
 //                switch (e.keyCode) {
 //                }
             }
+            function randColors(){
+                settings.randomizeColors();
+                fillClrSmps();
+                refreshAll();
+            }
+            function fillColorsWithGradient(){
+                settings.fillColorsWithGradient();
+                fillClrSmps();
+                refreshAll();
+            }
             
         </script>
 
@@ -244,16 +254,16 @@
             <div id="menu">
                 <div id="menuItemGame" class="menuItem">Gra</div>
                 <div id="menuItemSettings" class="menuItem">Ustawienia</div>
-                <div id="menuItemCurrentText" class="menuItem">Aktualny tekst</div>
+                <div id="menuItemCurrentText" class="menuItem">Tekst</div>
             </div>
 
             <div id="divGame">
                 <canvas id="gameCanvas" style="background-color: white;" width="500" height="600"></canvas>
             </div>            
-            <div id="divSettings">Settings<br />
+            <div id="divSettings">Ustawienia<br />
                 <table id="tableNumbers">
                     <tr>
-                        <td>Ilość znaków w linii: </td><td><input id="spinnerPageSizeX" name="value" value="100" class="settingsSpinner"></td>
+                        <td>Ilość znaków w linii: </td><td><input id="spinnerPageSizeX" disabled="disabled" name="value" value="100" class="settingsSpinner"></td>
                     </tr>
                     <tr>
                         <td>Liczba lini: </td><td><input id="spinnerPageSizeY" name="value" value="50" class="settingsSpinner"></td>
@@ -273,6 +283,16 @@
 
                 </table>
 
+                <div id="settingsColors">
+                    <input type="button" onclick="randColors()" value="Losuj nowe" />
+                    <div>
+                        <table id="tableGradient">
+                            <tr><td>Gradient</td><td></td></tr>
+                            <tr><td>Od</td><td><div id="clrsmpGradientFrom" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpickerGradientFrom" value="ffffff" /></td></tr>
+                            <tr><td>Do</td><td><div id="clrsmpGradientTo" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpickerGradientTo" value="ffffff" /></td></tr>
+                            <tr><td><input type="button" onclick="fillColorsWithGradient()" value="Generuj" /></td><td></td></tr>
+                        </table>
+                    </div>
                 <table id="tableColors">
                     <tr><td>Płótno</td><td><div id="clrsmpCanvas" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpickerCanvas" value="ffffff" /></td></tr>
                     <tr><td>Spacja</td><td><div id="clrsmpSpace" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpickerSpace" value="ffffff" /></td></tr>
@@ -311,8 +331,9 @@
                     <tr><td>Z</td><td><div id="clrsmp90" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker90" value="ffffff" /></td></tr>
                     
                 </table>
+                </div>
             </div>
-            <div id="divCurrentText">CurrentText</div>
+            <div id="divCurrentText">Tekst</div>
 
         </div>
     </body>

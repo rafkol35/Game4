@@ -68,9 +68,22 @@ div#divCurrentText{
 table#tableNumbers{
     float: left;
 }
-table#tableColors{
+
+div#settingsColors{
     float: left;
-    margin-left: 10px;
+    border: 1px solid black;
+    padding: 5px;
+    margin: 10px;    
+    font-size: 14px;
+}
+table#tableColors{
+    /*float: left;*/
+    /*margin-left: 10px;*/
+    font-size: 14px;
+}
+table#tableGradient{
+    font-size: 14px;
+    margin: 10px;
 }
 
 div.clrsmp{
