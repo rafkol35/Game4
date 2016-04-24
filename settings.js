@@ -73,7 +73,14 @@ class Settings{
         //console.log('ccc');
         this.canvasColor = "#"+newColor;
         $("#gameCanvas").css("background-color", this.canvasColor);
+        $("#clrsmpCanvas").css("background-color", this.canvasColor);
         //refreshAll();
+    }
+    
+    spaceColorChange(newColor){
+        this.colors[32] = "#"+newColor;
+        $("#clrsmpSpace").css("background-color", this.colors[32]);
+        refreshAll();
     }
     
     gradientFromColorChange(newColor){
@@ -204,8 +211,10 @@ function initSettings(){
     spinner.on( "spinchange", function( event, ui ) { fff("LetterHeight",ui.value); } );
     spinner.on( "spin", function( event, ui ) { fff("LetterHeight",ui.value); } );
     
+    // canvas color
     $("#gameCanvas").css("background-color", settings.canvasColor);
     $("#colorpickerCanvas").val(settings.canvasColor);
+    $("#clrsmpCanvas").css("background-color", settings.canvasColor);
     
     $('#colorpickerCanvas').ColorPicker({
 	onSubmit: function(hsb, hex, rgb, el) {
@@ -217,6 +226,22 @@ function initSettings(){
 		$(this).ColorPickerSetColor(this.value);
 	}
     })
+
+    // space color
+    $("#colorpickerSpace").val(settings.colors[32]);
+    $("#clrsmpSpace").css("background-color", settings.colors[32]);
+    
+    $('#colorpickerSpace').ColorPicker({
+	onSubmit: function(hsb, hex, rgb, el) {
+            settings.spaceColorChange(hex);
+            $(el).val("#"+hex);
+            $(el).ColorPickerHide();
+	},
+	onBeforeShow: function () {
+		$(this).ColorPickerSetColor(this.value);
+	}
+    })
+
 
     // gradient
     
