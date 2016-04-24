@@ -1,59 +1,66 @@
 <html>
     <head>
+        <meta charset="UTF-8">
+        <title>game4</title>
         <!--<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>-->
         <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
         <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+        <script src="jquery-mousewheel-3.1.13/jquery.mousewheel.min.js"></script>  
+        <script type="text/javascript" src="jquery-ui.min.js"></script>
+
+        <script type="text/javascript" src="settings.js"></script>
         <script type="text/javascript" src="utils.js"></script>
+
+        <script type="text/javascript" src="letter.js"></script>
+
         <link rel="Stylesheet" type="text/css" href="style.css" />
 
         <script>
-
-//            function preinit(){
-//                if (!createjs.Sound.initializeDefaultPlugins()) {
-//                    document.getElementById("error").style.display = "block";
-//                    document.getElementById("content").style.display = "none";
-//                    return;
-//                }
-//                canvas = document.getElementById("gameCanvas");
-//                stage = new createjs.Stage(canvas);
-//
-//                messageField = new createjs.Text("Loading", "bold 24px Arial", "#000000");
-//                messageField.maxWidth = 1000;
-//                messageField.textAlign = "center";
-//                messageField.textBaseline = "middle";
-//                messageField.x = canvas.width / 2;
-//                messageField.y = canvas.height / 2;
-//                stage.addChild(messageField);
-//                stage.update(); 	//update the stage to show text
-//                
-//                // begin loading content (only sounds to load)
-//                var assetsPath = "sounds/";
-//                manifest = [
-//                    {id: "ambient", src: "city.mp3"},
-//                    {id: "jazz", src: "jazz.mp3"}
-//                ];
-//                
-//                createjs.Sound.alternateExtensions = ["mp3"];
-//                preload = new createjs.LoadQueue(true, assetsPath);
-//                preload.installPlugin(createjs.Sound);
-//                preload.addEventListener("complete", init); // add an event listener for when load is completed
-//                preload.addEventListener("progress", updateLoading);
-//                preload.loadManifest(manifest);
-//            }
+            var panelGame;
+            var panelSettings;
+            var panelCurrentText;
+            var panelCurrent;
 
             var preload;
             var canvas, stage;
             //var drawingCanvas;
-            var oldPt;
-            var oldMidPt;
-            var brush;
-            
-            function updateLoading() {
-                messageField.text = "Loading " + (preload.progress * 100 | 0) + "%";
-                stage.update();
+            var letter;
+
+            function onOff(wonoff) {
+                console.log(wonoff.attr('id'));
+
+                panelGame.hide();
+                panelSettings.hide();
+                panelCurrentText.hide();
+
+                panelCurrent = wonoff;
+                panelCurrent.show();
             }
 
+            function refreshAll(){
+                //console.log("refreshAll");
+                
+            }
+            
             function init() {
+                panelGame = $('#divGame');
+                panelSettings = $('#divSettings');
+                panelCurrentText = $('#divCurrentText');
+
+                $('#menuItemGame').mousedown(function () {
+                    onOff(panelGame);
+                });
+                $('#menuItemSettings').mousedown(function () {
+                    onOff(panelSettings);
+                });
+                $('#menuItemCurrentText').mousedown(function () {
+                    onOff(panelCurrentText);
+                });
+
+                onOff(panelSettings);
+
+                initSettings();
+
                 if (!createjs.Sound.initializeDefaultPlugins()) {
                     document.getElementById("error").style.display = "block";
                     document.getElementById("content").style.display = "none";
@@ -64,46 +71,43 @@
                 //stage.autoClear = false;
                 stage.enableDOMEvents(true);
 
-                stage.addEventListener("stagemousedown", handleMouseDown);
-                stage.addEventListener("stagemouseup", handleMouseUp);
-                stage.addEventListener("stagemousemove", handleMouseMove);
-                
-                messageField = new createjs.Text("Loading", "bold 24px Arial", "#000000");
-                messageField.maxWidth = 1000;
-                messageField.textAlign = "center";
-                messageField.textBaseline = "middle";
-                messageField.x = canvas.width / 2;
-                messageField.y = canvas.height / 2;
-                stage.addChild(messageField);
-                stage.update(); 	//update the stage to show text
-
-                fpsLabel = new createjs.Text("-- fps", "bold 18px Arial", "#000");
-                stage.addChild(fpsLabel);
-                fpsLabel.x = 200;
-                fpsLabel.y = 160;
-
                 createjs.Ticker.timingMode = createjs.Ticker.RAF;
                 createjs.Ticker.addEventListener("tick", updateScene);
 
-                messageField.text = "Press space to play.";
+                var colors = ["#828b20", "#b0ac31", "#cbc53d", "#fad779", "#f9e4ad", "#faf2db", "#563512", "#9b4a0b", "#d36600", "#fe8a00", "#f9a71f"];
+                var radius = 50;
+                var rings = 10000;
 
-                oldPt = new createjs.Point(-1,-1);
-                oldMidPt = oldPt.clone();
-                
-                brush = new createjs.Bitmap("gfx/10.png"); 
-                brush.regX = brush.image.width / 2;
-                brush.regY = brush.image.height / 2;
-                brush.x = 0;
-                brush.y = 0;
-                //brush.color = "#00ff00";
-                brush.cache(0,0,brush.image.width,brush.image.height);
-                //brush.uncache();
-                brush.filters = [
-                    new createjs.ColorFilter(0,1,0,1, 0,0,0,0)
-                ];
-                stage.addChild(brush);
-                
+                //letter = createjs.
+
+                //canvas.width = 800;
+
+//		for (var j = 0; j < rings; ++j) {
+//                    letter = new createjs.Shape();
+//                    letter.graphics.beginFill(colors[Math.random() * colors.length | 0]).drawRect(0, 0, 50, 50);
+//                    letter.x = Math.random() * canvas.width;
+//                    letter.y = Math.random() * canvas.height;
+//                    letter.snapToPixel = true;
+//                    
+//                    stage.addChild(letter);
+//                    //letter.cache(0,0,50,50);
+//                    //letter.uncache();
+//                }
+
+                letter = new Letter();
+                letter.shape.x = 100;
+                stage.addChild(letter.shape);
+
+                fpsLabel = new createjs.Text("-- fps", "bold 18px Arial", "#000");
+                stage.addChild(fpsLabel);
+                fpsLabel.x = 0;
+                fpsLabel.y = 0;
+
                 stage.update();
+
+
+                //const square = new Letter2(10, 10);
+                fpsLabel.text = "aaa : " + settings.letterWidth;
             }
 
             var fpsLabel;
@@ -111,56 +115,58 @@
             var lt;
 
             function updateScene(event) {
-                fpsLabel.text = Math.round(createjs.Ticker.getMeasuredFPS()) + " fps";
+                //fpsLabel.text = Math.round(createjs.Ticker.getMeasuredFPS()) + " fps";
+                //fpsLabel.text = "aaa : " + letter.getSth(5);
 
                 var ct = createjs.Ticker.getTime();
                 var dt = ct - lt;
                 lt = ct;
 
-                brush.updateCache();
-                
                 if (isNaN(dt))
                     return;
                 stage.update();
             }
-            
-            function handleMouseDown(event) {
-                if (!event.primary) { return; }
-                oldPt = new createjs.Point(stage.mouseX, stage.mouseY);
-                oldMidPt = oldPt.clone();
-                messageField.text = "x: " + oldPt.x + " y: " + oldPt.y;                
-            }
 
-            function handleMouseMove(event) {
-                if (!event.primary) { return; }
-                var midPt = new createjs.Point(oldPt.x + stage.mouseX >> 1, oldPt.y + stage.mouseY >> 1);
-
-                //drawingCanvas.graphics.clear().setStrokeStyle(stroke, 'round', 'round').beginStroke(color).moveTo(midPt.x, midPt.y).curveTo(oldPt.x, oldPt.y, oldMidPt.x, oldMidPt.y);
-
-                oldPt.x = stage.mouseX;
-                oldPt.y = stage.mouseY;
-                messageField.text = "x: " + oldPt.x + " y: " + oldPt.y;
-                
-                oldMidPt.x = midPt.x;
-                oldMidPt.y = midPt.y;
-
-                brush.x = oldMidPt.x;
-                brush.y = oldMidPt.y;
-                
-                stage.update();
-            }
-
-            function handleMouseUp(event) {
-                if (!event.primary) { return; }
-                //stage.removeEventListener("stagemousemove", handleMouseMove);
-            }
         </script>
 
     </head>
     <body onload="init();" style="background-color: black; text-align: center">
         <div id="all">
-            <canvas id="gameCanvas" style="background-color: brown;" width="500" height="600"></canvas>
-            <div id="log" style="background-color: white; margin-top: 20px;">Log</div>
+
+            <div id="menu">
+                <div id="menuItemGame" class="menuItem">Gra</div>
+                <div id="menuItemSettings" class="menuItem">Ustawienia</div>
+                <div id="menuItemCurrentText" class="menuItem">Aktualny tekst</div>
+            </div>
+
+            <div id="divGame">
+                <canvas id="gameCanvas" style="background-color: brown;" width="500" height="600"></canvas>
+            </div>            
+            <div id="divSettings">Settings<br />
+                <table>
+                    <tr>
+                        <td>Ilość znaków w linii: </td><td><input id="spinnerPageSizeX" name="value" value="100" class="settingsSpinner"></td>
+                    </tr>
+                    <tr>
+                        <td>Liczba lini: </td><td><input id="spinnerPageSizeY" name="value" value="50" class="settingsSpinner"></td>
+                    </tr>
+                    <tr>
+                        <td>Odstęp miedzy liniami: </td><td><input id="spinnerLineSpace" name="value" value="50" class="settingsSpinner"></td>
+                    </tr>
+                    <tr>
+                        <td>Odstęp miedzy literami: </td><td><input id="spinnerLetterSpace" name="value" value="50" class="settingsSpinner"></td>
+                    </tr>
+                    <tr>
+                        <td>Szerokość litery:</td><td> <input id="spinnerLetterWidth" name="value" value="50" class="settingsSpinner"></td>
+                    </tr>
+                    <tr>
+                        <td>Wysokość litery: </td><td> <input id="spinnerLetterHeight" name="value" value="50" class="settingsSpinner"></td>
+                    </tr>
+
+                </table>
+            </div>
+            <div id="divCurrentText">CurrentText</div>
+
         </div>
     </body>
 </html>
