@@ -1,0 +1,136 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2016-04-18, 20:46:53
+    Author     : Ja
+*/
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+div#all{
+    width: 1024px;
+    /*background-color: green;*/
+    margin: 0px auto;
+    position: relative;
+}
+div#leftColumn{
+    float:left;
+    width: 670px;
+}
+
+div#rightColumn{
+    float:right;
+}
+
+#gameCanvas{
+    /*margin-top: 100px;*/
+}
+
+/*div#menu{
+    position: absolute;
+    width: 250px;
+    top: 0px;
+    background-color: red;
+}*/
+
+/*div.menuItem{
+    display: inline;
+    margin: 0px 30px;
+    font-size: 20px;
+    cursor: pointer;
+}*/
+
+div#divGame, div#divSettings, div#divCurrentText{
+    /*position: absolute;*/
+    /*top: 50px;*/
+    /*width: 1024px;*/
+    /*padding-top: 50px;*/
+}
+
+/*div#divGame{
+    background-color: green;
+    width: 1004px;
+    padding: 10px;
+}*/
+
+div#divGameMaxSize{
+/*    width: 670px;*/
+    border: 1px solid black;
+    padding: 10px;
+    /*float:left;*/
+}
+
+#gameCanvas{
+    border: 1px solid black;
+}
+
+div#divSettings{
+    background-color: orange;
+    width: 250px;
+    font-size: 12px;
+    /*float: right;*/
+}
+
+div#divCurrentText{
+    /*background-color: yellowgreen;*/
+    text-align: center;
+    /*clear:both;*/
+    /*float: left;*/
+    /*clear: both;*/
+    /*padding: 0px 20px;*/
+}
+
+
+/*settings*/
+.settingsSpinner{
+    width: 50px;
+}
+#divSettings table{
+    text-align: right;
+    border: 1px solid black;
+    font-size: 12px;
+}
+table#tableNumbers{
+    float: left;
+}
+
+div#settingsColors{
+    float: left;
+    border: 1px solid black;
+    padding: 5px;
+    margin: 10px;    
+    font-size: 14px;
+}
+table#tableColors{
+    /*float: left;*/
+    /*margin-left: 10px;*/
+    font-size: 14px;
+}
+table#tableGradient{
+    font-size: 14px;
+    margin: 10px;
+}
+
+div.clrsmp{
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border: 1px solid black;
+}
+
+div#currentText{
+    border: 1px solid black;
+    padding: 5px;
+    font-family: monospace;
+    letter-spacing: 0px;
+    /*width: 400px;*/
+    margin: 20px;
+    text-align: left;
+}
+
+/*settings*/

@@ -29,11 +29,11 @@ class Settings{
     constructor(){
         this.sts = [];
         this.sts["PageSizeX"] = 20;
-        this.sts["PageMaxSizeX"] = 400;
+        this.sts["PageMaxSizeX"] = 300;
         this.sts["PageSizeY"] = 10;
         this.sts["LineSpace"] = 0;
         this.sts["LetterSpace"] = 0;
-        this.sts["LetterWidth"] = 10;
+        this.sts["LetterWidth"] = 50;
         this.sts["LetterHeight"] = 15;        
         
         //this.colors2 = ["#828b20", "#b0ac31", "#cbc53d", "#fad779", "#f9e4ad", "#faf2db", "#563512", "#9b4a0b", "#d36600", "#fe8a00", "#f9a71f"];
