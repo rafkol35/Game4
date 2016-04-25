@@ -21,13 +21,13 @@
 
         <script type="text/javascript" src="letter.js"></script>
 
-        <link rel="Stylesheet" type="text/css" href="style.css" />
+        <link rel="Stylesheet" type="text/css" href="vers2.css" />
 
         <script>
-            var panelGame;
-            var panelSettings;
-            var panelCurrentText;
-            var panelCurrent;
+            //var panelGame;
+            //var panelSettings;
+            //var panelCurrentText;
+            //var panelCurrent;
 
             var preload;
             var canvas, stage;
@@ -36,16 +36,16 @@
             var cursorPosX = 0;
             var cursorPosY = 0;
                     
-            function onOff(wonoff) {
-                //console.log(wonoff.attr('id'));
-
-                panelGame.hide();
-                panelSettings.hide();
-                panelCurrentText.hide();
-
-                panelCurrent = wonoff;
-                panelCurrent.show();
-            }
+//            function onOff(wonoff) {
+//                //console.log(wonoff.attr('id'));
+//
+//                panelGame.hide();
+//                panelSettings.hide();
+//                panelCurrentText.hide();
+//
+//                panelCurrent = wonoff;
+//                panelCurrent.show();
+//            }
 
             function canvasResize(){
                 
@@ -62,49 +62,84 @@
                 
                 var newLineCntr = 0;
                 var currentString = "";
+                
+                var newCursorX = 0;
+                var newCursorY = 0;
+                    
                 for(var i = 0 ; i < letters.length ; ++i )
                 {
                     var letter = letters[i];
                     letter.update();
-                    letter.shape.x = letter.x * settings.sts["LetterWidth"];
-                    letter.shape.y = letter.y * (settings.sts["LetterHeight"] + settings.sts["LineSpace"]);
+                    
                     //letter.shate.cache(0,0,settings.sts["LetterWidth"],settings.sts["LetterHeight"])
+                    
                     
                     if( newLineCntr > 0 && (newLineCntr % settings.sts["PageSizeX"] === 0) ){
                         $("#currentText").html( $("#currentText").html() + "<br />" );
                         newLineCntr = 0;
+                        newCursorX = 0;
+                        newCursorY++;  
+                        
+                        letter.x = newCursorX;
+                        letter.y = newCursorY;                                              
                     }
-                    
                     if( letter.c === 13 ){
                         //currentString += String.fromCharCode(letter.c);
                         $("#currentText").html( $("#currentText").html() + "<br />" );
                         newLineCntr = 0;
-                    }else{
+                        newCursorX = 0;
+                        newCursorY++;  
+                        
+                        letter.x = newCursorX;
+                        letter.y = newCursorY;
+                        
+                    }else if( letter.c === 32) {
+                        $("#currentText").html( $("#currentText").html() + "&nbsp;" );
+                        
+                        letter.x = newCursorX;
+                        letter.y = newCursorY;
+                        
+                        newLineCntr++;
+                        newCursorX++;
+                    }else {
                         $("#currentText").html( $("#currentText").html() + String.fromCharCode(letter.c) );
+                        
+                        letter.x = newCursorX;
+                        letter.y = newCursorY;
+                        
+                        newCursorX++;
                         newLineCntr++;
                     }
                     
+                    
+                    
+                    letter.shape.x = letter.x * settings.sts["LetterWidth"];
+                    letter.shape.y = letter.y * (settings.sts["LetterHeight"] + settings.sts["LineSpace"]);                    
                 }
+                
+                cursorPosX = newCursorX;
+                cursorPosY = newCursorY;
+                
                 //$("#currentText").css("width",canvas.width);
                 //$("#currentText").html(currentString);
             }
             
             function init() {
-                panelGame = $('#divGame');
-                panelSettings = $('#divSettings');
-                panelCurrentText = $('#divCurrentText');
+//                panelGame = $('#divGame');
+//                panelSettings = $('#divSettings');
+//                panelCurrentText = $('#divCurrentText');
+//
+//                $('#menuItemGame').mousedown(function () {
+//                    onOff(panelGame);
+//                });
+//                $('#menuItemSettings').mousedown(function () {
+//                    onOff(panelSettings);
+//                });
+//                $('#menuItemCurrentText').mousedown(function () {
+//                    onOff(panelCurrentText);
+//                });
 
-                $('#menuItemGame').mousedown(function () {
-                    onOff(panelGame);
-                });
-                $('#menuItemSettings').mousedown(function () {
-                    onOff(panelSettings);
-                });
-                $('#menuItemCurrentText').mousedown(function () {
-                    onOff(panelCurrentText);
-                });
-
-                onOff(panelGame);
+                //onOff(panelGame);
 
                 initSettings();
 
@@ -123,49 +158,9 @@
                 createjs.Ticker.timingMode = createjs.Ticker.RAF;
                 createjs.Ticker.addEventListener("tick", updateScene);
 
-                var colors = ["#828b20", "#b0ac31", "#cbc53d", "#fad779", "#f9e4ad", "#faf2db", "#563512", "#9b4a0b", "#d36600", "#fe8a00", "#f9a71f"];
-                var radius = 50;
-                var rings = 10000;
-
-                //letter = createjs.
-
-                //canvas.width = 800;
-
-//		for (var j = 0; j < rings; ++j) {
-//                    letter = new createjs.Shape();
-//                    letter.graphics.beginFill(colors[Math.random() * colors.length | 0]).drawRect(0, 0, 50, 50);
-//                    letter.x = Math.random() * canvas.width;
-//                    letter.y = Math.random() * canvas.height;
-//                    letter.snapToPixel = true;
-//                    
-//                    stage.addChild(letter);
-//                    //letter.cache(0,0,50,50);
-//                    //letter.uncache();
-//                }
-
-//                for( var x = 0 ; x < 10 ; ++x )
-//                {
-//                    for( var y = 0 ; y < 10 ; ++y )
-//                    {
-//                        var letter = new Letter(x,y);
-//                        stage.addChild(letter.shape);
-//                        letters.push(letter);
-//                    }
-//                }
-
-//                fpsLabel = new createjs.Text("-- fps", "bold 18px Arial", "#000");
-//                stage.addChild(fpsLabel);
-//                fpsLabel.x = 0;
-//                fpsLabel.y = 0;
-
                 stage.update();
 
                 document.onkeydown = handleKeyDown;
-                //document.onkeyup = handleKeyUp;
-            
-                //const square = new Letter2(10, 10);
-                //fpsLabel.text = "aaa : " + settings.letterWidth;
-                
                 refreshAll();                
             }
 
@@ -174,9 +169,7 @@
             var lt;
 
             function updateScene(event) {
-                //fpsLabel.text = Math.round(createjs.Ticker.getMeasuredFPS()) + " fps";
-                //fpsLabel.text = "aaa : " + letter.getSth(5);
-
+                
                 var ct = createjs.Ticker.getTime();
                 var dt = ct - lt;
                 lt = ct;
@@ -192,15 +185,7 @@
                     var e = window.event;
                 }
                   
-                if(panelCurrent !== panelGame) return;
-                    
-                //console.log(settings.colors.indexOf(e.keyCode));
-                //console.log(settings.colors[e.keyCode]);
-                //console.log(e.keyCode);
-                
-                //if( settings.colors.indexOf(e.keyCode) !== -1 ){
-                
-                //console.log(cursorPosX + " " + cursorPosY);
+                //if(panelCurrent !== panelGame) return;
                 
                 if( cursorPosY === settings.sts["PageSizeY"]-1 ){ // jezeli kursor w ostatniej lini
                     // enter nie moze byc wcale
@@ -281,21 +266,31 @@
         </script>
 
     </head>
-    <body onload="init();" style="background-color: black; text-align: center">
+    <body onload="init();" style="background-color: white; text-align: center">
         <div id="all">
 
-            <div id="menu">
+<!--            <div id="menu">
                 <div id="menuItemGame" class="menuItem">Gra</div>
                 <div id="menuItemSettings" class="menuItem">Ustawienia</div>
                 <div id="menuItemCurrentText" class="menuItem">Tekst</div>
+            </div>-->
+
+            <div id="leftColumn">
+            
+            <!--<div id="divGame">-->
+                <div id="divGameMaxSize">
+                    <canvas id="gameCanvas" style="background-color: white;" width="500" height="600"></canvas>
+                </div>
+            <!--</div>-->    
+            
+            <div id="divCurrentText">
+                <div id="currentText"></div>
+            </div>
+                
             </div>
 
-            <div id="divGame">
-                <div id="divGameMaxSize">
-                <canvas id="gameCanvas" style="background-color: white;" width="500" height="600"></canvas>
-                </div>
-            </div>            
-            <div id="divSettings">Ustawienia<br />
+<div id="rightColumn">
+            <div id="divSettings">
                 <table id="tableNumbers">
 <!--                    <tr>
                         <td>Ilość znaków w linii: </td><td><input id="spinnerPageSizeX" disabled="disabled" name="value" value="100" class="settingsSpinner"></td>
@@ -309,9 +304,9 @@
                     <tr>
                         <td>Odstęp miedzy liniami: </td><td><input id="spinnerLineSpace" disabled="disabled" name="value" value="50" class="settingsSpinner"></td>
                     </tr>
-                    <tr>
+<!--                    <tr>
                         <td>Odstęp miedzy literami: </td><td><input id="spinnerLetterSpace" disabled="disabled" name="value" value="50" class="settingsSpinner"></td>
-                    </tr>
+                    </tr>-->
                     <tr>
                         <td>Szerokość litery:</td><td> <input id="spinnerLetterWidth" disabled="disabled" name="value" value="50" class="settingsSpinner"></td>
                     </tr>
@@ -371,10 +366,9 @@
                 </table>
                 </div>
             </div>
-            
-            <div id="divCurrentText">Tekst
-                <div id="currentText"></div>
-            </div>
+</div>
+<!--<div style="clear: both;">-->
+           
                 
         </div>
     </body>
