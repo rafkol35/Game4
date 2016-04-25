@@ -24,29 +24,13 @@
         <link rel="Stylesheet" type="text/css" href="vers2.css" />
 
         <script>
-            //var panelGame;
-            //var panelSettings;
-            //var panelCurrentText;
-            //var panelCurrent;
-
+            
             var preload;
             var canvas, stage;
-            //var drawingCanvas;
             var letters = new Array();
             var cursorPosX = 0;
             var cursorPosY = 0;
                     
-//            function onOff(wonoff) {
-//                //console.log(wonoff.attr('id'));
-//
-//                panelGame.hide();
-//                panelSettings.hide();
-//                panelCurrentText.hide();
-//
-//                panelCurrent = wonoff;
-//                panelCurrent.show();
-//            }
-
             function canvasResize(){
                 
             }
@@ -125,22 +109,8 @@
             }
             
             function init() {
-//                panelGame = $('#divGame');
-//                panelSettings = $('#divSettings');
-//                panelCurrentText = $('#divCurrentText');
-//
-//                $('#menuItemGame').mousedown(function () {
-//                    onOff(panelGame);
-//                });
-//                $('#menuItemSettings').mousedown(function () {
-//                    onOff(panelSettings);
-//                });
-//                $('#menuItemCurrentText').mousedown(function () {
-//                    onOff(panelCurrentText);
-//                });
-
-                //onOff(panelGame);
-
+                console.log("init()");
+                
                 initSettings();
 
                 if (!createjs.Sound.initializeDefaultPlugins()) {
@@ -152,8 +122,6 @@
                 stage = new createjs.Stage(canvas);
                 //stage.autoClear = false;
                 stage.enableDOMEvents(true);
-
-                //$("#gameCanvas").css("background-color", "yellow");
 
                 createjs.Ticker.timingMode = createjs.Ticker.RAF;
                 createjs.Ticker.addEventListener("tick", updateScene);
