@@ -29,6 +29,7 @@ class Settings{
     constructor(){
         this.sts = [];
         this.sts["PageSizeX"] = 20;
+        this.sts["PageMaxSizeX"] = 400;
         this.sts["PageSizeY"] = 10;
         this.sts["LineSpace"] = 0;
         this.sts["LetterSpace"] = 0;
@@ -170,12 +171,19 @@ function fff(setID, val){
 function initSettings(){
     var spinner;
             
-    spinner = $( "#spinnerPageSizeX" ).spinner();
-    spinner.spinner( "option", "min", 10 );
-    spinner.spinner( "option", "max", 50 );
-    spinner.spinner( "value", settings.sts["PageSizeX"] );
-    spinner.on( "spinchange", function( event, ui ) { fff("PageSizeX",ui.value); } );
-    spinner.on( "spin", function( event, ui ) { fff("PageSizeX",ui.value); } );
+//    spinner = $( "#spinnerPageSizeX" ).spinner();
+//    spinner.spinner( "option", "min", 10 );
+//    spinner.spinner( "option", "max", 50 );
+//    spinner.spinner( "value", settings.sts["PageSizeX"] );
+//    spinner.on( "spinchange", function( event, ui ) { fff("PageSizeX",ui.value); } );
+//    spinner.on( "spin", function( event, ui ) { fff("PageSizeX",ui.value); } );
+    
+    spinner = $( "#spinnerMaxPageSizeX" ).spinner();
+    spinner.spinner( "option", "min", 300 );
+    spinner.spinner( "option", "max", 650 );
+    spinner.spinner( "value", settings.sts["PageMaxSizeX"] );
+    spinner.on( "spinchange", function( event, ui ) { fff("PageMaxSizeX",ui.value); } );
+    spinner.on( "spin", function( event, ui ) { fff("PageMaxSizeX",ui.value); } );
     
     spinner = $( "#spinnerPageSizeY" ).spinner();
     spinner.spinner( "option", "min", 10 );

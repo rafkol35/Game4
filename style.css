@@ -46,10 +46,23 @@ div#divGame, div#divSettings, div#divCurrentText{
 
 div#divGame{
     background-color: green;
+    width: 1004px;
+    padding: 10px;
+}
+
+div#divGameMaxSize{
+    width: 670px;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+#gameCanvas{
+    border: 1px solid black;
 }
 
 div#divSettings{
     background-color: orange;
+    font-size: 12px;
 }
 
 div#divCurrentText{
@@ -66,6 +79,7 @@ div#divCurrentText{
 #divSettings table{
     text-align: right;
     border: 1px solid black;
+    font-size: 12px;
 }
 table#tableNumbers{
     float: left;

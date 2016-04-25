@@ -49,6 +49,8 @@
 
             function refreshAll(){
                 //console.log("refreshAll");
+                settings.sts["PageSizeX"] = Math.floor( settings.sts["PageMaxSizeX"] / settings.sts["LetterWidth"] );
+                
                 canvas.width = settings.sts["PageSizeX"] * settings.sts["LetterWidth"];
                 canvas.height = settings.sts["PageSizeY"] * (settings.sts["LetterHeight"] + settings.sts["LineSpace"]);
                 
@@ -98,7 +100,7 @@
                     onOff(panelCurrentText);
                 });
 
-                onOff(panelSettings);
+                onOff(panelGame);
 
                 initSettings();
 
@@ -285,12 +287,17 @@
             </div>
 
             <div id="divGame">
+                <div id="divGameMaxSize">
                 <canvas id="gameCanvas" style="background-color: white;" width="500" height="600"></canvas>
+                </div>
             </div>            
             <div id="divSettings">Ustawienia<br />
                 <table id="tableNumbers">
-                    <tr>
+<!--                    <tr>
                         <td>Ilość znaków w linii: </td><td><input id="spinnerPageSizeX" disabled="disabled" name="value" value="100" class="settingsSpinner"></td>
+                    </tr>-->
+                    <tr>
+                        <td>Max szerokość: </td><td><input id="spinnerMaxPageSizeX" disabled="disabled" name="value" value="100" class="settingsSpinner"></td>
                     </tr>
                     <tr>
                         <td>Liczba lini: </td><td><input id="spinnerPageSizeY" disabled="disabled" name="value" value="50" class="settingsSpinner"></td>
