@@ -1,0 +1,112 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Name>Game4</Name>
+    <ProjectGuid>{94089cb3-0ffa-4936-aa9f-afa6ea7146d7}</ProjectGuid>
+    <RootNamespace>
+    </RootNamespace>
+    <OutputType>Library</OutputType>
+    <ProjectTypeGuids>{A0786B88-2ADB-4C21-ABE8-AA2D79766269}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <IncludeDebugInformation>true</IncludeDebugInformation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <IncludeDebugInformation>false</IncludeDebugInformation>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="colorpicker\css\colorpicker.css" />
+    <Compile Include="colorpicker\css\layout.css" />
+    <Compile Include="colorpicker\images\blank.gif" />
+    <Compile Include="colorpicker\images\colorpicker_background.png" />
+    <Compile Include="colorpicker\images\colorpicker_hex.png" />
+    <Compile Include="colorpicker\images\colorpicker_hsb_b.png" />
+    <Compile Include="colorpicker\images\colorpicker_hsb_h.png" />
+    <Compile Include="colorpicker\images\colorpicker_hsb_s.png" />
+    <Compile Include="colorpicker\images\colorpicker_indic.gif" />
+    <Compile Include="colorpicker\images\colorpicker_overlay.png" />
+    <Compile Include="colorpicker\images\colorpicker_rgb_b.png" />
+    <Compile Include="colorpicker\images\colorpicker_rgb_g.png" />
+    <Compile Include="colorpicker\images\colorpicker_rgb_r.png" />
+    <Compile Include="colorpicker\images\colorpicker_select.gif" />
+    <Compile Include="colorpicker\images\colorpicker_submit.png" />
+    <Compile Include="colorpicker\images\custom_background.png" />
+    <Compile Include="colorpicker\images\custom_hex.png" />
+    <Compile Include="colorpicker\images\custom_hsb_b.png" />
+    <Compile Include="colorpicker\images\custom_hsb_h.png" />
+    <Compile Include="colorpicker\images\custom_hsb_s.png" />
+    <Compile Include="colorpicker\images\custom_indic.gif" />
+    <Compile Include="colorpicker\images\custom_rgb_b.png" />
+    <Compile Include="colorpicker\images\custom_rgb_g.png" />
+    <Compile Include="colorpicker\images\custom_rgb_r.png" />
+    <Compile Include="colorpicker\images\custom_submit.png" />
+    <Compile Include="colorpicker\images\select.png" />
+    <Compile Include="colorpicker\images\select2.png" />
+    <Compile Include="colorpicker\images\slider.png" />
+    <Compile Include="colorpicker\js\colorpicker.js" />
+    <Compile Include="colorpicker\js\eye.js" />
+    <Compile Include="colorpicker\js\jquery.js" />
+    <Compile Include="colorpicker\js\layout.js" />
+    <Compile Include="colorpicker\js\utils.js" />
+    <Compile Include="images\ui-icons_444444_256x240.png" />
+    <Compile Include="images\ui-icons_555555_256x240.png" />
+    <Compile Include="images\ui-icons_777620_256x240.png" />
+    <Compile Include="images\ui-icons_777777_256x240.png" />
+    <Compile Include="images\ui-icons_cc0000_256x240.png" />
+    <Compile Include="images\ui-icons_ffffff_256x240.png" />
+    <Compile Include="jquery-mousewheel-3.1.13\test\browserify\bundle.js" />
+    <Compile Include="jquery-mousewheel-3.1.13\test\browserify\index.html" />
+    <Compile Include="jquery-mousewheel-3.1.13\test\browserify\main.js" />
+    <Compile Include="jquery-mousewheel-3.1.13\test\browserify\README.md" />
+    <Compile Include="jquery-mousewheel-3.1.13\test\index.html" />
+    <Compile Include="jquery-mousewheel-3.1.13\test\scroll.html" />
+    <Compile Include="jquery-mousewheel-3.1.13\.gitignore" />
+    <Compile Include="jquery-mousewheel-3.1.13\.jshintrc" />
+    <Compile Include="jquery-mousewheel-3.1.13\bower.json" />
+    <Compile Include="jquery-mousewheel-3.1.13\ChangeLog.md" />
+    <Compile Include="jquery-mousewheel-3.1.13\Gruntfile.js" />
+    <Compile Include="jquery-mousewheel-3.1.13\jquery.mousewheel.js" />
+    <Compile Include="jquery-mousewheel-3.1.13\jquery.mousewheel.min.js" />
+    <Compile Include="jquery-mousewheel-3.1.13\LICENSE.txt" />
+    <Compile Include="jquery-mousewheel-3.1.13\package.json" />
+    <Compile Include="jquery-mousewheel-3.1.13\README.md" />
+    <Compile Include="nbproject\private\private.properties" />
+    <Compile Include="nbproject\project.properties" />
+    <Compile Include="nbproject\project.xml" />
+    <Compile Include=".gitignore" />
+    <Compile Include="index.html" />
+    <Compile Include="index2.html" />
+    <Compile Include="index2__.html" />
+    <Compile Include="index3.html" />
+    <Compile Include="jquery-1.10.2.min.js" />
+    <Compile Include="jquery-ui.css" />
+    <Compile Include="jquery-ui.min.css" />
+    <Compile Include="jquery-ui.min.js" />
+    <Compile Include="jquery-ui.structure.css" />
+    <Compile Include="jquery-ui.structure.min.css" />
+    <Compile Include="jquery-ui.theme.css" />
+    <Compile Include="jquery-ui.theme.min.css" />
+    <Compile Include="letter.js" />
+    <Compile Include="newhtml.html" />
+    <Compile Include="newhtml1.html" />
+    <Compile Include="settings.js" />
+    <Compile Include="style.css" />
+    <Compile Include="test.html" />
+    <Compile Include="todo.txt" />
+    <Compile Include="utils.js" />
+    <Compile Include="vers2.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="colorpicker\css" />
+    <Folder Include="colorpicker\images" />
+    <Folder Include="colorpicker\js" />
+    <Folder Include="colorpicker" />
+    <Folder Include="gfx" />
+    <Folder Include="images" />
+    <Folder Include="jquery-mousewheel-3.1.13\test\browserify" />
+    <Folder Include="jquery-mousewheel-3.1.13\test" />
+    <Folder Include="jquery-mousewheel-3.1.13" />
+    <Folder Include="nbproject\private" />
+    <Folder Include="nbproject" />
+  </ItemGroup>
+</Project>
