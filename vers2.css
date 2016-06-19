@@ -134,3 +134,7 @@ div#currentText{
 }
 
 /*settings*/
+
+#taCurrentText{
+    resize: none;    
+}
