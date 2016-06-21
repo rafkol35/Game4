@@ -1,4 +1,4 @@
 1) okno tekstowe zamiast diva
-2) ustawianie znaków u¿ytkownika + inne znaki - plus znak i minus przy znakach 
+2) ustawianie znaków u¿ytkownika + inne znaki - plus znak i minus przy znakach : okienko z tekstem na jeden znak i przycisk dodaj
 3) u³adniæ wygl¹d
 3) load i save projektu

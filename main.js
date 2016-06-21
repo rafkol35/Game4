@@ -16,7 +16,6 @@ function refreshAll() {
     canvas.width = settings.sts["PageSizeX"] * settings.sts["LetterWidth"];
     canvas.height = settings.sts["PageSizeY"] * (settings.sts["LetterHeight"] + settings.sts["LineSpace"]);
 
-
     ctta.attr('cols', settings.sts["PageSizeX"]);
     ctta.attr('rows', settings.sts["PageSizeY"]);
 
