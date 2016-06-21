@@ -54,8 +54,11 @@ function Settings() {
     //var KEYCODE_ENTER = 13;		//useful keycode
     //var KEYCODE_SPACE = 32;		//useful keycode
     //this.colors[13] = '';
-    this.colors[32] = '#ffffff';
-    this.colors[13] = this.canvasColor; //'#ff0000';
+    this.colors['\n'] = '#ffffff';
+    this.colors[' '] = this.canvasColor; //'#ff0000';
+    this.colors['A'] = '#ff0000';
+    this.colors['B'] = '#00ff00';
+    this.colors['C'] = '#0000ff';
 }
 
 Settings.prototype.spinnerChange = function (wv, nv) {
@@ -101,7 +104,7 @@ Settings.prototype.letterColorChange = function (wc, newColor) {
 Settings.prototype.randomizeColors = function () {
     for (var i = 65; i <= 90; ++i)
     {
-        this.colors[i] = '#' + Math.floor(Math.random() * 16777215).toString(16); //this.colors2[Math.random() * this.colors2.length | 0];
+        //this.colors[i] = '#' + Math.floor(Math.random() * 16777215).toString(16); //this.colors2[Math.random() * this.colors2.length | 0];
     }
 };
 

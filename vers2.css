@@ -77,16 +77,6 @@ div#divSettings {
     /*float: right;*/
 }
 
-div#divCurrentText {
-    /*background-color: yellowgreen;*/
-    text-align: center;
-    /*clear:both;*/
-    /*float: left;*/
-    /*clear: both;*/
-    /*padding: 0px 20px;*/
-}
-
-
 /*settings*/
 .settingsSpinner {
     width: 50px;
@@ -128,16 +118,6 @@ div.clrsmp {
     border: 1px solid black;
 }
 
-div#currentText {
-    border: 1px solid black;
-    padding: 5px;
-    /*font-family: monospace;*/
-    letter-spacing: 0px;
-    /*width: 400px;*/
-    margin: 20px;
-    text-align: left;
-}
-
 /*settings*/
 
 #taCurrentText {
@@ -147,4 +127,6 @@ div#currentText {
     /*font-size: 10px;*/
     /*line-height: 15px;*/    
     /*text-space-collapse:preserve-breaks;*/
+    margin-top: 20px;
+    width: 374px;
 }
