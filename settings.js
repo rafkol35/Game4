@@ -66,6 +66,12 @@ Settings.prototype.spinnerChange = function (wv, nv) {
     refreshAll();
 };
 
+Settings.prototype.spinnerChange2 = function (wv, nv) {
+    this.sts[wv] = nv;
+    //refreshAll();
+    refreshCanvasSize();
+};
+
 Settings.prototype.canvasColorChange = function (newColor) {
     //console.log('ccc');
     this.canvasColor = "#" + newColor;
@@ -163,6 +169,11 @@ function fff(setID, val) {
     settings.spinnerChange(setID, val);
 }
 
+function fff2(setID, val) {
+    //console.log(spinner);
+    settings.spinnerChange2(setID, val);
+}
+
 function initSettings() {
 
     console.log("initSettings()");
@@ -181,10 +192,10 @@ function initSettings() {
     spinner.spinner("option", "max", 650);
     spinner.spinner("value", settings.sts["PageMaxSizeX"]);
     spinner.on("spinchange", function (event, ui) {
-        fff("PageMaxSizeX", ui.value);
+        fff2("PageMaxSizeX", ui.value);
     });
     spinner.on("spin", function (event, ui) {
-        fff("PageMaxSizeX", ui.value);
+        fff2("PageMaxSizeX", ui.value);
     });
 
     spinner = $("#spinnerPageSizeY").spinner();
@@ -192,10 +203,10 @@ function initSettings() {
     spinner.spinner("option", "max", 70);
     spinner.spinner("value", settings.sts["PageSizeY"]);
     spinner.on("spinchange", function (event, ui) {
-        fff("PageSizeY", ui.value);
+        fff2("PageSizeY", ui.value);
     });
     spinner.on("spin", function (event, ui) {
-        fff("PageSizeY", ui.value);
+        fff2("PageSizeY", ui.value);
     });
 
     spinner = $("#spinnerLineSpace").spinner();
