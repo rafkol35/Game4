@@ -93,12 +93,38 @@ function refreshAll() {
 
 function cttaTextChanged(newText) {
     //console.log(this.value.length);
-    for (var i = 0 ; i < this.value.length ; ++i) {
-        if (i < letters.length) {
-            letters[i].c = this.value[i];
-            letters[i].updateColor();
+    var textIndex = 0;
+    var letterIndex = 0;
+    for (textIndex = 0 ; textIndex < this.value.length ; ++textIndex) {
+        //if (i < letters.length) {
+        //    letters[i].c = this.value[i];
+        //    letters[i].updateColor();
+        //}
+        if (letterIndex >= letters.length) break;
+
+        var textChar = this.value[textIndex];
+        letters[letterIndex].c = textChar;
+        letters[letterIndex].updateColor();
+        letterIndex++;
+        if (letterIndex >= letters.length) break;
+
+        if (textChar === '\n') {
+            //do konca lini wstawiamy puste znaki...
+            var posx = letterIndex % settings.sts["PageSizeX"];
+            for (var lineIndex = posx ; lineIndex < settings.sts["PageSizeX"]; ++lineIndex) {
+                if (letterIndex >= letters.length) break;
+                letters[letterIndex].c = ' ';
+                letters[letterIndex].updateColor();
+                letterIndex++;
+            }
         }
     }
+    // do konca dokumentu puste znaki
+    for (; letterIndex < letters.length;++letterIndex) {
+        letters[letterIndex].c = ' ';
+        letters[letterIndex].updateColor();
+    }
+
     stage.update();
 }
 
