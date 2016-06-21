@@ -92,7 +92,14 @@ function refreshAll() {
 }
 
 function cttaTextChanged(newText) {
-    console.log(this.value.length);
+    //console.log(this.value.length);
+    for (var i = 0 ; i < this.value.length ; ++i) {
+        if (i < letters.length) {
+            letters[i].c = this.value[i];
+            letters[i].updateColor();
+        }
+    }
+    stage.update();
 }
 
 function init() {
@@ -127,24 +134,16 @@ function init() {
     //document.onkeydown = handleKeyDown;
     refreshCanvasSize();
 
-    //var letter1 = new Letter(0, 'A');
-    //stage.addChild(letter1.shape);
-    //letter1.updateAll();
-    ////letters.push(letter);
-    //
-    //var letter2 = new Letter(1, 'B');
-    //stage.addChild(letter2.shape);
-    //letter2.updateAll();
-
     var numberOfLetters = settings.sts["PageSizeX"] * settings.sts["PageSizeY"]
     var abc = ['A', 'B', 'C'];
     
     for (var i = 0 ; i < numberOfLetters-1 ; ++i) {
-
-        var i2 = Math.floor((Math.random() * 3));
-        var letter2 = new Letter(i, abc[i2]);
-        stage.addChild(letter2.shape);
-        letter2.updateAll();
+        //var i2 = Math.floor((Math.random() * 3));
+        //var letter = new Letter(i, abc[i2]);
+        var letter = new Letter(i, ' ');
+        stage.addChild(letter.shape);
+        letter.updateAll();
+        letters.push(letter);
     }
 
     //letters.push(letter);
