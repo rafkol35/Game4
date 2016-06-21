@@ -92,14 +92,43 @@ function refreshAll() {
 }
 
 function cttaTextChanged(newText) {
-    //console.log(this.value.length);
+    //console.log("cttaTextChanged");
+    // jeszcze pokusze sie o to aby obliczyc zajmowana przestrzen i nie wstawiac wiecej niz mozna...
+    //if (this.value.length > 5) this.value = this.value.substr(0,5);
+
+    var sstsPSX = settings.sts["PageSizeX"];
+
     var textIndex = 0;
     var letterIndex = 0;
+    if (this.value.length >= letters.length) {
+        for (textIndex = 0 ; textIndex < this.value.length ; ++textIndex) {
+            if (letterIndex >= letters.length) {
+                this.value = this.value.substr(0, textIndex);
+                break;
+            }
+            //var textChar = this.value[textIndex];
+            letterIndex++;
+
+            if (letterIndex >= letters.length) {
+                this.value = this.value.substr(0, textIndex);
+                break;
+            }
+
+            if (this.value[textIndex] === '\n') {
+                //do konca lini wstawiamy puste znaki...
+                var posx = letterIndex % sstsPSX;
+                for (var lineIndex = posx ; lineIndex < sstsPSX; ++lineIndex) {
+                    if (letterIndex >= letters.length) break;
+                    //letters[letterIndex].c = ' ';
+                    //letters[letterIndex].updateColor();
+                    letterIndex++;
+                }
+            }
+        }
+    }
+    textIndex = 0;
+    letterIndex = 0;
     for (textIndex = 0 ; textIndex < this.value.length ; ++textIndex) {
-        //if (i < letters.length) {
-        //    letters[i].c = this.value[i];
-        //    letters[i].updateColor();
-        //}
         if (letterIndex >= letters.length) break;
 
         var textChar = this.value[textIndex];
@@ -110,8 +139,8 @@ function cttaTextChanged(newText) {
 
         if (textChar === '\n') {
             //do konca lini wstawiamy puste znaki...
-            var posx = letterIndex % settings.sts["PageSizeX"];
-            for (var lineIndex = posx ; lineIndex < settings.sts["PageSizeX"]; ++lineIndex) {
+            var posx = letterIndex % sstsPSX;
+            for (var lineIndex = posx ; lineIndex < sstsPSX; ++lineIndex) {
                 if (letterIndex >= letters.length) break;
                 letters[letterIndex].c = ' ';
                 letters[letterIndex].updateColor();
