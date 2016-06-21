@@ -1,3 +1,4 @@
-8) pseudo save
-10) reset tekstu ?
-11) dwie wersje : wszystko razem i wszystko osobno
+1) okno tekstowe zamiast diva
+2) ustawianie znaków u¿ytkownika + inne znaki - plus znak i minus przy znakach 
+3) u³adniæ wygl¹d
+3) load i save projektu

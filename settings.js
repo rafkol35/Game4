@@ -24,7 +24,7 @@ function rgb2hex(rgb) {
     //console.log(res);
     //return res;
 }
-
+//0123456789
 function Settings() {
     //constructor(){
     console.log("Settings::constructor");

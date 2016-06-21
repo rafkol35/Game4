@@ -17,232 +17,31 @@
 
     <script type="text/javascript" src="utils.js"></script>
     <script type="text/javascript" src="letter.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+
     <link rel="Stylesheet" type="text/css" href="vers2.css" />
-    <script>
-        var preload;
-        var canvas, stage;
-        var letters = new Array();
-        var cursorPosX = 0;
-        var cursorPosY = 0;
 
-        function canvasResize() {
-
-        }
-
-        function refreshAll() {
-            //console.log("refreshAll");
-            settings.sts["PageSizeX"] = Math.floor(settings.sts["PageMaxSizeX"] / settings.sts["LetterWidth"]);
-
-            canvas.width = settings.sts["PageSizeX"] * settings.sts["LetterWidth"];
-            canvas.height = settings.sts["PageSizeY"] * (settings.sts["LetterHeight"] + settings.sts["LineSpace"]);
-
-            $("#currentText").html("");
-
-            var newLineCntr = 0;
-            var currentString = "";
-
-            var newCursorX = 0;
-            var newCursorY = 0;
-
-            for (var i = 0 ; i < letters.length ; ++i) {
-                var letter = letters[i];
-                letter.update();
-
-                //letter.shate.cache(0,0,settings.sts["LetterWidth"],settings.sts["LetterHeight"])
-
-                if (newLineCntr > 0 && (newLineCntr % settings.sts["PageSizeX"] === 0)) {
-                    $("#currentText").html($("#currentText").html() + "<br />");
-                    newLineCntr = 0;
-                    newCursorX = 0;
-                    newCursorY++;
-
-                    letter.x = newCursorX;
-                    letter.y = newCursorY;
-                }
-                if (letter.c === 13) {
-                    //currentString += String.fromCharCode(letter.c);
-                    $("#currentText").html($("#currentText").html() + "<br />");
-                    newLineCntr = 0;
-                    newCursorX = 0;
-                    newCursorY++;
-
-                    letter.x = newCursorX;
-                    letter.y = newCursorY;
-
-                } else if (letter.c === 32) {
-                    $("#currentText").html($("#currentText").html() + "&nbsp;");
-
-                    letter.x = newCursorX;
-                    letter.y = newCursorY;
-
-                    newLineCntr++;
-                    newCursorX++;
-                } else {
-                    $("#currentText").html($("#currentText").html() + String.fromCharCode(letter.c));
-
-                    letter.x = newCursorX;
-                    letter.y = newCursorY;
-
-                    newCursorX++;
-                    newLineCntr++;
-                }
-
-                letter.shape.x = letter.x * settings.sts["LetterWidth"];
-                letter.shape.y = letter.y * (settings.sts["LetterHeight"] + settings.sts["LineSpace"]);
-            }
-
-            cursorPosX = newCursorX;
-            cursorPosY = newCursorY;
-        }
-
-        function init() {           
-            initSettings();
-
-            if (!createjs.Sound.initializeDefaultPlugins()) {
-                document.getElementById("error").style.display = "block";
-                document.getElementById("content").style.display = "none";
-                return;
-            }
-            canvas = document.getElementById("gameCanvas");
-            stage = new createjs.Stage(canvas);
-            //stage.autoClear = false;
-            stage.enableDOMEvents(true);
-
-            //$("#gameCanvas").css("background-color", "yellow");
-
-            createjs.Ticker.timingMode = createjs.Ticker.RAF;
-            createjs.Ticker.addEventListener("tick", updateScene);
-
-            stage.update();
-
-            document.onkeydown = handleKeyDown;
-            refreshAll();
-        }
-
-        //var fpsLabel;
-        var fps = 0;
-        var lt;
-
-        function updateScene(event) {
-
-            var ct = createjs.Ticker.getTime();
-            var dt = ct - lt;
-            lt = ct;
-
-            if (isNaN(dt))
-                return;
-            stage.update();
-        }
-
-        function handleKeyDown(e) {
-            //cross browser issues exist
-            if (!e) {
-                var e = window.event;
-            }
-
-            //if(panelCurrent !== panelGame) return;
-
-            if (cursorPosY === settings.sts["PageSizeY"] - 1) { // jezeli kursor w ostatniej lini
-                // enter nie moze byc wcale
-                if (e.keyCode === 13) //enter
-                {
-                    e.preventDefault();
-                    return false;
-                }
-                if (cursorPosX === settings.sts["PageSizeX"]) {
-                    if (e.keyCode !== 8) // backspace dozwolony
-                    {
-                        e.preventDefault();
-                        return false;
-                    }
-                }
-            }
-
-            if (settings.colors[e.keyCode] !== undefined) {
-                var letter = new Letter(cursorPosX, cursorPosY, e.keyCode);
-                stage.addChild(letter.shape);
-                letters.push(letter);
-                if (cursorPosX === settings.sts["PageSizeX"] - 1 && cursorPosY !== settings.sts["PageSizeY"] - 1) {
-                    cursorPosX = 0;
-                    cursorPosY++;
-                }
-                else {
-                    cursorPosX++;
-                }
-                refreshAll();
-            }
-
-            if (e.keyCode === 8) {
-                if (letters.length > 0) {
-                    var lastLetter = letters[letters.length - 1];
-                    cursorPosX = lastLetter.x;
-                    cursorPosY = lastLetter.y;
-
-                    stage.removeChild(lastLetter.shape);
-                    letters.pop();
-                    //cursorPosX--;
-
-                    refreshAll();
-                }
-            }
-
-            if (e.keyCode === 32 || e.keyCode === 8) {
-                e.preventDefault();
-                return false;
-            }
-
-            if (e.keyCode === 13) //enter
-            {
-                if (cursorPosX !== 0) cursorPosY++;
-                cursorPosX = 0;
-            }
-        }
-        function randColors() {
-            settings.randomizeColors();
-            fillClrSmps();
-            refreshAll();
-        }
-        function fillColorsWithGradient() {
-            settings.fillColorsWithGradient();
-            fillClrSmps();
-            refreshAll();
-        }
-
-        function updateCurrentText() {
-
-        }
-
-    </script>
 </head>
 <body onload="init();" style="background-color: white; text-align: center">
     <div id="all">
-        <!--            <div id="menu">
-                        <div id="menuItemGame" class="menuItem">Gra</div>
-                        <div id="menuItemSettings" class="menuItem">Ustawienia</div>
-                        <div id="menuItemCurrentText" class="menuItem">Tekst</div>
-                    </div>-->
+
         <div id="leftColumn">
 
-            <!--<div id="divGame">-->
             <div id="divGameMaxSize">
                 <canvas id="gameCanvas" style="background-color: white;" width="500" height="600"></canvas>
             </div>
-            <!--</div>-->
 
             <div id="divCurrentText">
                 <div id="currentText"></div>
             </div>
 
-            <textarea id="taCurrentText" rows="10" cols="20">
-            </textarea>
+            <textarea id="taCurrentText" rows="10" cols="10"></textarea>
 
         </div>
         <div id="rightColumn">
             <div id="divSettings">
                 <table id="tableNumbers">
-                    <!--                    <tr>
-                                            <td>Ilość znaków w linii: </td><td><input id="spinnerPageSizeX" disabled="disabled" name="value" value="100" class="settingsSpinner"></td>
-                                        </tr>-->
+
                     <tr>
                         <td>Max szerokość: </td>
                         <td><input id="spinnerMaxPageSizeX" disabled="disabled" name="value" value="100" class="settingsSpinner"></td>
@@ -255,9 +54,6 @@
                         <td>Odstęp miedzy liniami: </td>
                         <td><input id="spinnerLineSpace" disabled="disabled" name="value" value="50" class="settingsSpinner"></td>
                     </tr>
-                    <!--                    <tr>
-                                            <td>Odstęp miedzy literami: </td><td><input id="spinnerLetterSpace" disabled="disabled" name="value" value="50" class="settingsSpinner"></td>
-                                        </tr>-->
                     <tr>
                         <td>Szerokość litery:</td>
                         <td> <input id="spinnerLetterWidth" disabled="disabled" name="value" value="50" class="settingsSpinner"></td>
@@ -318,7 +114,6 @@
                 </div>
             </div>
         </div>
-        <!--<div style="clear: both;">-->
 
 
     </div>
