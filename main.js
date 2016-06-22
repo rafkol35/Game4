@@ -37,6 +37,11 @@ function refreshCanvasSize() {
         for (var i = 0 ; i < letters.length ; ++i) {
             letters[i].updateAll();            
         }
+    } else { //jak np... ustalona zostaje tylko wielkosc odstepu
+        // A RESZTA MUSI ZMIENIC POZYCJE
+        for (var i = 0 ; i < letters.length ; ++i) {
+            letters[i].updateAll();
+        }
     }
     //stage.update()
     cttaTextChanged2();
@@ -169,13 +174,13 @@ function randColors() {
     //console.log("Call to doSomething took " + _allTime + " milliseconds in " + _noa + " attemps." + _allTime / _noa);
     settings.randomizeColors();
     fillClrSmps();
-    refreshAll();
+    //refreshAll();
 }
 
 function fillColorsWithGradient() {
     settings.fillColorsWithGradient();
     fillClrSmps();
-    refreshAll();
+    //refreshAll();
 }
 
 function updateCurrentText() {

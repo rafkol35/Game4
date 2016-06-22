@@ -42,8 +42,7 @@ function Settings() {
     this.canvasColor = "#ffffff";
 
     this.colors = [];
-    this.randomizeColors();
-
+    
     this.gradientFromColor = "#000000";
     this.gradientToColor = "#ffffff";
 
@@ -56,9 +55,17 @@ function Settings() {
     //this.colors[13] = '';
     this.colors['\n'] = '#ffffff';
     this.colors[' '] = this.canvasColor; //'#ff0000';
-    this.colors['A'] = '#ff0000';
-    this.colors['B'] = '#00ff00';
-    this.colors['C'] = '#0000ff';
+    //this.colors['A'] = '#ff0000';
+    //this.colors['B'] = '#00ff00';
+    //this.colors['C'] = '#0000ff';
+
+    //"ABC".charCodeAt(0) // returns 65
+    //String.fromCharCode(65, 66, 67); // returns 'ABC'
+    for (var i = 'A'.charCodeAt(0) ; i <= 'Z'.charCodeAt(0) ; ++i) {
+        //console.log(i);
+        this.colors[String.fromCharCode(i)] = '#ff0000';
+    }
+    this.randomizeColors();
 }
 
 Settings.prototype.spinnerChange = function (wv, nv) {
@@ -108,10 +115,22 @@ Settings.prototype.letterColorChange = function (wc, newColor) {
 };
 
 Settings.prototype.randomizeColors = function () {
-    for (var i = 65; i <= 90; ++i)
-    {
-        //this.colors[i] = '#' + Math.floor(Math.random() * 16777215).toString(16); //this.colors2[Math.random() * this.colors2.length | 0];
+    //for (var i = 65; i <= 90; ++i)
+
+    //console.log('rc');
+    ///console.log(Object.keys(this.colors));
+
+    for (var i in this.colors) {
+        //console.log(i + " " + this.colors[i]);
+        if (i === ' ' || i === '\n') continue;
+        this.colors[i] = '#' + Math.floor(Math.random() * 16777215).toString(16); //this.colors2[Math.random() * this.colors2.length | 0];
     }
+
+    //console.log(this.colors.length);
+    //for(var i = 0 ; this.colors.length ; ++i)
+    //{
+    //    //this.colors[i] = '#' + Math.floor(Math.random() * 16777215).toString(16); //this.colors2[Math.random() * this.colors2.length | 0];
+    //}
 };
 
 Settings.prototype.fillColorsWithGradient = function () {
@@ -214,10 +233,10 @@ function initSettings() {
     spinner.spinner("option", "max", 50);
     spinner.spinner("value", settings.sts["LineSpace"]);
     spinner.on("spinchange", function (event, ui) {
-        fff("LineSpace", ui.value);
+        fff2("LineSpace", ui.value);
     });
     spinner.on("spin", function (event, ui) {
-        fff("LineSpace", ui.value);
+        fff2("LineSpace", ui.value);
     });
 
     spinner = $("#spinnerLetterSpace").spinner();
@@ -236,10 +255,10 @@ function initSettings() {
     spinner.spinner("option", "max", 50);
     spinner.spinner("value", settings.sts["LetterWidth"]);
     spinner.on("spinchange", function (event, ui) {
-        fff("LetterWidth", ui.value);
+        fff2("LetterWidth", ui.value);
     });
     spinner.on("spin", function (event, ui) {
-        fff("LetterWidth", ui.value);
+        fff2("LetterWidth", ui.value);
     });
 
     spinner = $("#spinnerLetterHeight").spinner();
@@ -247,10 +266,10 @@ function initSettings() {
     spinner.spinner("option", "max", 50);
     spinner.spinner("value", settings.sts["LetterHeight"]);
     spinner.on("spinchange", function (event, ui) {
-        fff("LetterHeight", ui.value);
+        fff2("LetterHeight", ui.value);
     });
     spinner.on("spin", function (event, ui) {
-        fff("LetterHeight", ui.value);
+        fff2("LetterHeight", ui.value);
     });
 
     // canvas color
@@ -313,13 +332,14 @@ function initSettings() {
         }
     })
 
-    for (var l = 65; l <= 90; l++)
-    {
-        $("#colorpicker" + l).val(settings.colors[l]);
-        $("#clrsmp" + l).css("background-color", settings.colors[l]);
+    //for (var l = 65; l <= 90; l++)
+    //{
+    for (var l in settings.colors) {
+        $("#colorpicker" + l.charCodeAt(0)).val(settings.colors[l]);
+        $("#clrsmp" + l.charCodeAt(0)).css("background-color", settings.colors[l]);
         //console.log($("#colorpicker"+l));
 
-        $("#colorpicker" + l).ColorPicker({
+        $("#colorpicker" + String.fromCharCode(l)).ColorPicker({
             onSubmit: function (hsb, hex, rgb, el) {
                 settings.letterColorChange(el, hex);
                 $(el).val("#" + hex);
@@ -338,8 +358,8 @@ function initSettings() {
 }
 
 function fillClrSmps() {
-    for (var l = 65; l <= 90; l++) {
-        $("#colorpicker" + l).val(settings.colors[l]);
-        $("#clrsmp" + l).css("background-color", settings.colors[l]);
+    for (var i in settings.colors) {
+        $("#colorpicker" + i.charCodeAt(0)).val(settings.colors[i]);
+        $("#clrsmp" + i.charCodeAt(0)).css("background-color", settings.colors[i]);
     }
 }
