@@ -11,7 +11,7 @@ function canvasResize() {
 
 function refreshCanvasSize() {
     settings.sts["PageSizeX"] = Math.floor(settings.sts["PageMaxSizeX"] / settings.sts["LetterWidth"]);
-    console.log(settings.sts["PageSizeX"]);
+    //console.log(settings.sts["PageSizeX"]);
     canvas.width = settings.sts["PageSizeX"] * settings.sts["LetterWidth"];
     canvas.height = settings.sts["PageSizeY"] * (settings.sts["LetterHeight"] + settings.sts["LineSpace"]);
 
