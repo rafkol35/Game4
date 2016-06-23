@@ -1,13 +1,9 @@
-﻿var preload;
+var preload;
 var canvas, stage;
 var letters = new Array();
 var cursorPosX = 0;
 var cursorPosY = 0;
 var ctta;
-
-function canvasResize() {
-
-}
 
 function refreshCanvasSize() {
     settings.sts["PageSizeX"] = Math.floor(settings.sts["PageMaxSizeX"] / settings.sts["LetterWidth"]);
@@ -29,7 +25,7 @@ function refreshCanvasSize() {
         }
     } else if (letters.length > numberOfLetters) {
         while (letters.length > numberOfLetters) {
-            console.log("usuwam");
+            //console.log("usuwam");
             var letter = letters.pop();
             stage.removeChild(letter.shape);
         }
@@ -68,14 +64,12 @@ function cttaTextChanged2() {
     var textIndex = 0;
     var letterIndex = 0;
     if (ctta.val().length >= letters.length) {
-        for (textIndex = 0 ; textIndex < ctta.value.length ; ++textIndex) {
+        for (textIndex = 0 ; textIndex < ctta.val().length ; ++textIndex) {
             if (letterIndex >= letters.length) {
-                ctta.value = ctta.value.substr(0, textIndex);
+                ctta.value = ctta.val().substr(0, textIndex);
                 break;
             }
-            //var textChar = this.value[textIndex];
             letterIndex++;
-
             if (letterIndex >= letters.length) {
                 this.value = this.value.substr(0, textIndex);
                 break;
@@ -86,8 +80,6 @@ function cttaTextChanged2() {
                 var posx = letterIndex % sstsPSX;
                 for (var lineIndex = posx ; lineIndex < sstsPSX; ++lineIndex) {
                     if (letterIndex >= letters.length) break;
-                    //letters[letterIndex].c = ' ';
-                    //letters[letterIndex].updateColor();
                     letterIndex++;
                 }
             }
@@ -100,7 +92,7 @@ function cttaTextChanged2() {
 
         var textChar = ctta.val()[textIndex];
         if (letters[letterIndex].c !== textChar) {
-            letters[letterIndex].c = textChar;
+            letters[letterIndex].c = textChar.charCodeAt(0);
             letters[letterIndex].updateColor();
         }
         letterIndex++;
@@ -112,7 +104,7 @@ function cttaTextChanged2() {
             for (var lineIndex = posx ; lineIndex < sstsPSX; ++lineIndex) {
                 if (letterIndex >= letters.length) break;
                 if (letters[letterIndex].c !== ' ') {
-                    letters[letterIndex].c = ' ';
+                    letters[letterIndex].c = ' '.charCodeAt(0);
                     letters[letterIndex].updateColor();
                 }
                 letterIndex++;
@@ -122,7 +114,7 @@ function cttaTextChanged2() {
     // do konca dokumentu puste znaki
     for (; letterIndex < letters.length; ++letterIndex) {
         if (letters[letterIndex].c !== ' ') {
-            letters[letterIndex].c = ' ';
+            letters[letterIndex].c = ' '.charCodeAt(0);
             letters[letterIndex].updateColor();
         }
     }
@@ -143,6 +135,15 @@ function init() {
     ctta = $('#taCurrentText');
     ctta.on('input change keyup', cttaTextChanged);
     
+    //<table id="tableColors">
+    //<tr><td>0</td><td><div id="clrsmp48" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker48" value="ffffff" /></td></tr>
+    
+//    for (var i in settings.colors) {
+//        if (i === ' ' || i === '\n') continue;
+//        var cid = i.charCodeAt(0);        
+//        $('#tableColors tr:last').after('<tr><td>'+i+'</td><td><div id="clrsmp'+cid+'" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker'+cid+'" value="ffffff" /></td></tr>');
+//    }
+    
     initSettings();
 
     if (!createjs.Sound.initializeDefaultPlugins()) {
@@ -156,33 +157,18 @@ function init() {
     stage.enableDOMEvents(true);
 
     refreshCanvasSize();
+    
+                        
 }
 
-//var fpsLabel;
-var fps = 0;
-var lt;
-
-//function updateScene(event) {
-//    var ct = createjs.Ticker.getTime();
-//    var dt = ct - lt;
-//    lt = ct;
-//    if (isNaN(dt)) return;
-//    stage.update();
-//}
-
 function randColors() {
-    //console.log("Call to doSomething took " + _allTime + " milliseconds in " + _noa + " attemps." + _allTime / _noa);
     settings.randomizeColors();
     fillClrSmps();
-    //refreshAll();
+    cttaTextChanged2();
 }
 
 function fillColorsWithGradient() {
     settings.fillColorsWithGradient();
     fillClrSmps();
-    //refreshAll();
-}
-
-function updateCurrentText() {
-
+    cttaTextChanged2();
 }

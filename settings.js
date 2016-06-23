@@ -53,8 +53,13 @@ function Settings() {
     //var KEYCODE_ENTER = 13;		//useful keycode
     //var KEYCODE_SPACE = 32;		//useful keycode
     //this.colors[13] = '';
-    this.colors['\n'] = '#ffffff';
-    this.colors[' '] = this.canvasColor; //'#ff0000';
+    
+    this.spaceCode = ' '.charCodeAt(0);
+    this.newLineCode = '\n'.charCodeAt(0);
+    
+    this.colors[this.newLineCode] = this.canvasColor;;
+    this.colors[this.spaceCode] = this.canvasColor; //'#ff0000';
+    
     //this.colors['A'] = '#ff0000';
     //this.colors['B'] = '#00ff00';
     //this.colors['C'] = '#0000ff';
@@ -64,24 +69,26 @@ function Settings() {
 
     for (var i = 'A'.charCodeAt(0) ; i <= 'Z'.charCodeAt(0) ; ++i) {
         //console.log(i);
-        this.colors[String.fromCharCode(i)] = '#ff0000';
+        this.colors[i] = '#ff0000';
     }
     for (var i = 'a'.charCodeAt(0) ; i <= 'z'.charCodeAt(0) ; ++i) {
         //console.log(i);
-        this.colors[String.fromCharCode(i)] = '#ff0000';
+        //this.colors[String.fromCharCode(i)] = '#ff0000';
     }
     for (var i = '0'.charCodeAt(0) ; i <= '9'.charCodeAt(0) ; ++i) {
-        //console.log(i);
-        //this.colors[String.fromCharCode(i)] = '#ff0000';
+        //console.log(String.fromCharCode(i));
+        //this.colors[""+String.fromCharCode(i)] = '#ff0000';
     }
 
     var s = "±æê³ó¶ñ¿¼¡ÆÊ£Ó¦Ñ¯¬";
     for (var i = 0 ; i < s.length ; ++i)
     {
         //console.log(String.fromCharCode(s.charCodeAt(i)));
-        this.colors[String.fromCharCode(s.charCodeAt(i))] = '#ff0000';
+        //this.colors[String.fromCharCode(s.charCodeAt(i))] = '#ff0000';
     }
     
+    //console.log(this.colors);
+    //console.log(this.colors[2]);
     
     this.randomizeColors();
 }
@@ -94,30 +101,23 @@ function decode_utf8(s) {
     return decodeURIComponent(escape(s));
 }
 
-Settings.prototype.spinnerChange = function (wv, nv) {
-    this.sts[wv] = nv;
-    refreshAll();
-};
-
 Settings.prototype.spinnerChange2 = function (wv, nv) {
     this.sts[wv] = nv;
-    //refreshAll();
     refreshCanvasSize();
 };
 
 Settings.prototype.canvasColorChange = function (newColor) {
-    //console.log('ccc');
     this.canvasColor = "#" + newColor;
     this.colors[13] = this.canvasColor;
     $("#gameCanvas").css("background-color", this.canvasColor);
     $("#clrsmpCanvas").css("background-color", this.canvasColor);
-    //refreshAll();
+    cttaTextChanged2();
 };
 
 Settings.prototype.spaceColorChange = function (newColor) {
     this.colors[32] = "#" + newColor;
     $("#clrsmpSpace").css("background-color", this.colors[32]);
-    refreshAll();
+    cttaTextChanged2();
 };
 
 Settings.prototype.gradientFromColorChange = function (newColor) {
@@ -130,33 +130,22 @@ Settings.prototype.gradientToColorChange = function (newColor) {
 };
 
 Settings.prototype.letterColorChange = function (wc, newColor) {
-    //console.log("lcc:"+$(wc).attr("id")+" " +newColor);
-
     var aid = $(wc).attr("id");
     var naid = aid.substr(11);
-    //console.log(naid);
     this.colors[naid] = "#" + newColor;
     $("#clrsmp" + naid).css("background-color", this.colors[naid]);
-    refreshAll();
+    cttaTextChanged2();
 };
 
 Settings.prototype.randomizeColors = function () {
-    //for (var i = 65; i <= 90; ++i)
-
-    //console.log('rc');
-    ///console.log(Object.keys(this.colors));
-
-    for (var i in this.colors) {
-        //console.log(i + " " + this.colors[i]);
-        if (i === ' ' || i === '\n') continue;
+    for (var i in this.colors) {        
+        //console.log(i + " " + this.colors[i] + " " + this.newLineCode + " " + this.spaceCode);
+        if (i == this.newLineCode || i == this.spaceCode) {
+            //console.log("contine");
+            continue;
+        }
         this.colors[i] = '#' + Math.floor(Math.random() * 16777215).toString(16); //this.colors2[Math.random() * this.colors2.length | 0];
     }
-
-    //console.log(this.colors.length);
-    //for(var i = 0 ; this.colors.length ; ++i)
-    //{
-    //    //this.colors[i] = '#' + Math.floor(Math.random() * 16777215).toString(16); //this.colors2[Math.random() * this.colors2.length | 0];
-    //}
 };
 
 Settings.prototype.fillColorsWithGradient = function () {
@@ -205,33 +194,17 @@ Settings.prototype.fillColorsWithGradient = function () {
         //this.colors[i] = '#'+Math.floor(Math.random()*16777215).toString(16);
         cntr++;
     }
-}
+};
 
 var settings = new Settings();
 
-function fff(setID, val) {
-    //console.log(spinner);
-    settings.spinnerChange(setID, val);
-}
-
 function fff2(setID, val) {
-    //console.log(spinner);
     settings.spinnerChange2(setID, val);
 }
 
 function initSettings() {
-
-    console.log("initSettings()");
-
     var spinner;
-
-//    spinner = $( "#spinnerPageSizeX" ).spinner();
-//    spinner.spinner( "option", "min", 10 );
-//    spinner.spinner( "option", "max", 50 );
-//    spinner.spinner( "value", settings.sts["PageSizeX"] );
-//    spinner.on( "spinchange", function( event, ui ) { fff("PageSizeX",ui.value); } );
-//    spinner.on( "spin", function( event, ui ) { fff("PageSizeX",ui.value); } );
-
+    
     spinner = $("#spinnerMaxPageSizeX").spinner();
     spinner.spinner("option", "min", 300);
     spinner.spinner("option", "max", 650);
@@ -270,10 +243,10 @@ function initSettings() {
     spinner.spinner("option", "max", 20);
     spinner.spinner("value", settings.sts["LetterSpace"]);
     spinner.on("spinchange", function (event, ui) {
-        fff("LetterSpace", ui.value);
+        fff2("LetterSpace", ui.value);
     });
     spinner.on("spin", function (event, ui) {
-        fff("LetterSpace", ui.value);
+        fff2("LetterSpace", ui.value);
     });
 
     spinner = $("#spinnerLetterWidth").spinner();
@@ -312,7 +285,7 @@ function initSettings() {
         onBeforeShow: function () {
             $(this).ColorPickerSetColor(this.value);
         }
-    })
+    });
 
     // space color
     $("#colorpickerSpace").val(settings.colors[32]);
@@ -327,11 +300,9 @@ function initSettings() {
         onBeforeShow: function () {
             $(this).ColorPickerSetColor(this.value);
         }
-    })
-
+    });
 
     // gradient
-
     $("#colorpickerGradientFrom").val(settings.gradientFromColor);
     $("#clrsmpGradientFrom").css("background-color", settings.gradientFromColor);
     $("#colorpickerGradientTo").val(settings.gradientToColor);
@@ -346,7 +317,7 @@ function initSettings() {
         onBeforeShow: function () {
             $(this).ColorPickerSetColor(this.value);
         }
-    })
+    });
     $('#colorpickerGradientTo').ColorPicker({
         onSubmit: function (hsb, hex, rgb, el) {
             settings.gradientToColorChange(hex);
@@ -356,16 +327,24 @@ function initSettings() {
         onBeforeShow: function () {
             $(this).ColorPickerSetColor(this.value);
         }
-    })
+    });
 
     //for (var l = 65; l <= 90; l++)
     //{
-    for (var l in settings.colors) {
-        $("#colorpicker" + l.charCodeAt(0)).val(settings.colors[l]);
-        $("#clrsmp" + l.charCodeAt(0)).css("background-color", settings.colors[l]);
-        //console.log($("#colorpicker"+l));
-
-        $("#colorpicker" + String.fromCharCode(l)).ColorPicker({
+    
+    //console.log(settings.colors);
+    
+    for (var col in settings.colors) {
+         if (col === settings.newLineCode || col === settings.spaceCode) continue;
+         
+        //var clrPicker = $("#colorpicker" + l.charCodeAt(0));        
+        //console.log(clrPicker);
+        //console.log(l.charCodeAt(0));
+        
+        $("#colorpicker" + col).val(settings.colors[col]);        
+        $("#clrsmp" + col).css("background-color", settings.colors[col]);
+        
+        $("#colorpicker" + col).ColorPicker({
             onSubmit: function (hsb, hex, rgb, el) {
                 settings.letterColorChange(el, hex);
                 $(el).val("#" + hex);
@@ -373,19 +352,14 @@ function initSettings() {
             },
             onBeforeShow: function () {
                 $(this).ColorPickerSetColor(this.value);
-            },
-//        onChange: function(hsb, hex, rgb, el) {
-//            //settings.letterColorChange(el,hex);
-//            //$(el).val("#"+hex);
-//            console.log(hex);
-//        }
-        })
+            }
+        });
     }
 }
 
 function fillClrSmps() {
     for (var i in settings.colors) {
-        $("#colorpicker" + i.charCodeAt(0)).val(settings.colors[i]);
-        $("#clrsmp" + i.charCodeAt(0)).css("background-color", settings.colors[i]);
+        $("#colorpicker" + i).val(settings.colors[i]);
+        $("#clrsmp" + i).css("background-color", settings.colors[i]);
     }
 }
