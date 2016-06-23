@@ -63,20 +63,23 @@ function Settings() {
     //String.fromCharCode(65, 66, 67); // returns 'ABC'
 
     for (var i = 'A'.charCodeAt(0) ; i <= 'Z'.charCodeAt(0) ; ++i) {
-        this.colors[i] = '#ff0000';
+        //console.log(i);
+        this.colors[String.fromCharCode(i)] = '#ff0000';
     }
     for (var i = 'a'.charCodeAt(0) ; i <= 'z'.charCodeAt(0) ; ++i) {
-        this.colors[i] = '#ff0000';
+        //console.log(i);
+        this.colors[String.fromCharCode(i)] = '#ff0000';
     }
     for (var i = '0'.charCodeAt(0) ; i <= '9'.charCodeAt(0) ; ++i) {
-        this.colors[i] = '#ff0000';
+        //console.log(i);
+        //this.colors[String.fromCharCode(i)] = '#ff0000';
     }
 
     var s = "±æê³ó¶ñ¿¼¡ÆÊ£Ó¦Ñ¯¬";
     for (var i = 0 ; i < s.length ; ++i)
     {
         //console.log(String.fromCharCode(s.charCodeAt(i)));
-        this.colors[s.charCodeAt(i)] = '#ff0000';
+        this.colors[String.fromCharCode(s.charCodeAt(i))] = '#ff0000';
     }
     
     
