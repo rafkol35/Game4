@@ -66,16 +66,16 @@ function cttaTextChanged2() {
     if (ctta.val().length >= letters.length) {
         for (textIndex = 0 ; textIndex < ctta.val().length ; ++textIndex) {
             if (letterIndex >= letters.length) {
-                ctta.value = ctta.val().substr(0, textIndex);
+                ctta.val(ctta.val().substr(0, textIndex));
                 break;
             }
             letterIndex++;
             if (letterIndex >= letters.length) {
-                this.value = this.value.substr(0, textIndex);
+                ctta.val(ctta.val().substr(0, textIndex));
                 break;
             }
 
-            if (this.value[textIndex] === '\n') {
+            if (ctta.val()[textIndex] === '\n') {
                 //do konca lini wstawiamy puste znaki...
                 var posx = letterIndex % sstsPSX;
                 for (var lineIndex = posx ; lineIndex < sstsPSX; ++lineIndex) {
