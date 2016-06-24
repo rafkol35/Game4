@@ -50,7 +50,7 @@ function Settings() {
 
     for (var i = 'A'.charCodeAt(0) ; i <= 'Z'.charCodeAt(0) ; ++i) {
         //console.log(i);
-        this.colors[i] = '#ff0000';
+        //this.colors[i] = '#ff0000';
     }
     for (var i = 'a'.charCodeAt(0) ; i <= 'z'.charCodeAt(0) ; ++i) {
         //console.log(i);
@@ -58,14 +58,14 @@ function Settings() {
     }
     for (var i = '0'.charCodeAt(0) ; i <= '1'.charCodeAt(0) ; ++i) {
         //console.log(String.fromCharCode(i));
-        this.colors[i] = '#ff0000';
+        //this.colors[i] = '#ff0000';
     }
-
-    var s = "±æê³ó¶ñ¿¼¡ÆÊ£Ó¦Ñ¯¬";
-    for (var i = 0 ; i < s.length ; ++i)
+    //±æê³ó¶ñ¿¼¡ÆÊ£Ó¦Ñ¯¬
+    this.sss = "Aa¡±BbCcÆæDdEeFfGgHhIiJjKkLl£³MmNnÑñOoÓóPpQqRrSs¦¶TtUuVvWwXxYyZz¯¿¬¼0123456789.:,!?()";
+    for (var i = 0 ; i < this.sss.length ; ++i)
     {
         //console.log(String.fromCharCode(s.charCodeAt(i)));
-        //this.colors[String.fromCharCode(s.charCodeAt(i))] = '#ff0000';
+        this.colors[this.sss.charCodeAt(i)] = '#ff0000';
     }
     
     //console.log(this.colors);
@@ -137,8 +137,23 @@ Settings.prototype.fillColorsWithGradient = function () {
     var from = hex2rgb(this.gradientFromColor);
     var to = hex2rgb(this.gradientToColor);
     
-    var numColors = 90 - 65;
+//    var colCounter = 0;
+//    //for (var col in settings.colors) {
+//    for(var i = 0 ; i < settings.sss.length ; ++i) {
+//        var col = settings.sss.charCodeAt(i);
+//        //console.log(col);
+//        if (col == settings.newLineCode || col == settings.spaceCode || col == -1)
+//            continue;
+//        if ((colCounter++) % 3 === 0)
+//            $('#tableColors tr:last').after('<tr></tr>');
+//        
+//        $('#tableColors tr:last').append('<td class="tdcleft">' + String.fromCharCode(col) + '</td><td class="tdcmiddle"><div id="clrsmp' + col + '" class="clrsmp"></div></td><td class="tdcright"><input type="text" maxlength="6" size="6" class="clrsmp2" id="colorpicker' + col + '" value="ffffff" /></td>');
+//    }
 
+
+    var numColors = this.sss.length;
+    //console.log(numColors);
+    
     var rFrom = from[0];
     var gFrom = from[1];
     var bFrom = from[2];
@@ -152,10 +167,12 @@ Settings.prototype.fillColorsWithGradient = function () {
     var bStep = bdiff / numColors;
 
     var cntr = 0;
-    for (var i = 65; i <= 90; ++i)
-    {
+    //for (var i = 65; i <= 90; ++i)
+    for(var i = 0 ; i < settings.sss.length ; ++i) {
+        var col = settings.sss.charCodeAt(i);
+    
         var rgbStr = "rgb(" + Math.round(rFrom + cntr * rStep) + "," + Math.round(gFrom + cntr * gStep) + "," + Math.round(bFrom + cntr * bStep) + ")";
-        this.colors[i] = rgb2hex(rgbStr);
+        this.colors[col] = rgb2hex(rgbStr);
         cntr++;
     }
 };

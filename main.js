@@ -138,7 +138,10 @@ function init() {
     //$('#tableColors').append('<tr><td></td></tr>');
     $('#tableColors').append('<tr></tr>');
     var colCounter = 0;
-    for (var col in settings.colors) {
+    //for (var col in settings.colors) {
+    for(var i = 0 ; i < settings.sss.length ; ++i) {
+        var col = settings.sss.charCodeAt(i);
+        //console.log(col);
         if (col == settings.newLineCode || col == settings.spaceCode || col == -1)
             continue;
         if ((colCounter++) % 3 === 0)
