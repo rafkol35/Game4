@@ -36,7 +36,6 @@
         <div id="rightColumn">
             <div id="divSettings">
                 <table id="tableNumbers">
-
                     <tr>
                         <td>Max szeroko¶æ: </td>
                         <td><input id="spinnerMaxPageSizeX" disabled="disabled" name="value" value="100" class="settingsSpinner"></td>
@@ -59,18 +58,27 @@
                     </tr>
                 </table>
                 <div id="settingsColors">
-                    <input type="button" onclick="randColors()" value="Losuj nowe" />
                     <div>
                         <table id="tableGradient">
                             <tr><td>Gradient</td><td></td></tr>
-                            <tr><td>Od</td><td><div id="clrsmpGradientFrom" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpickerGradientFrom" value="ffffff" /></td></tr>
-                            <tr><td>Do</td><td><div id="clrsmpGradientTo" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpickerGradientTo" value="ffffff" /></td></tr>
+                            <tr><td>Od</td><td><div id="clrsmpGradientFrom" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" class="clrsmp2" id="colorpickerGradientFrom" value="ffffff" /></td></tr>
+                            <tr><td>Do</td><td><div id="clrsmpGradientTo" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" class="clrsmp2" id="colorpickerGradientTo" value="ffffff" /></td></tr>
                             <tr><td><input type="button" onclick="fillColorsWithGradient()" value="Generuj" /></td><td></td></tr>
                         </table>
-                    </div>
+                    </div>                    
+                    <table id="tableColors2">
+                        <tr>
+                            <td>P³ótno</td><td><div id="clrsmpCanvas" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" class="clrsmp2" id="colorpickerCanvas" value="ffffff" /></td>
+                            <td>Spacja</td><td><div id="clrsmpSpace" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" class="clrsmp2" id="colorpickerSpace" value="ffffff" /></td>
+                            <td>Niezdef.</td><td><div id="clrsmpUndef" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" class="clrsmp2" id="colorpickerUndef" value="ffffff" /></td>
+                        </tr>
+                    </table>
+                    
+                    <input type="button" onclick="randColors()" value="Losuj nowe" />
+                    
                     <table id="tableColors">
-                        <tr><td>P³ótno</td><td><div id="clrsmpCanvas" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpickerCanvas" value="ffffff" /></td></tr>
-                        <tr><td>Spacja</td><td><div id="clrsmpSpace" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpickerSpace" value="ffffff" /></td></tr>
+                        <tr><td>P³ótno</td><td><div id="clrsmpCanvas" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" class="clrsmp2" id="colorpickerCanvas" value="ffffff" /></td></tr>
+                        <tr><td>Spacja</td><td><div id="clrsmpSpace" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" class="clrsmp2" id="colorpickerSpace" value="ffffff" /></td></tr>
 
 <!--                        <tr><td>0</td><td><div id="clrsmp48" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker48" value="ffffff" /></td></tr>
                         <tr><td>1</td><td><div id="clrsmp49" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker49" value="ffffff" /></td></tr>

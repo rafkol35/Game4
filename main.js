@@ -138,16 +138,16 @@ function init() {
     for (var col in settings.colors) {
         if (col == settings.newLineCode || col == settings.spaceCode) continue;
         var cid = String.fromCharCode(col);        
-        $('#tableColors tr:last').after('<tr><td>'+cid+'</td><td><div id="clrsmp'+col+'" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker'+col+'" value="ffffff" /></td></tr>');
+        $('#tableColors tr:last').after('<tr><td>'+cid+'</td><td><div id="clrsmp'+col+'" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" class="clrsmp2" id="colorpicker'+col+'" value="ffffff" /></td></tr>');
     }
     
     initSettings();
 
-    if (!createjs.Sound.initializeDefaultPlugins()) {
-        document.getElementById("error").style.display = "block";
-        document.getElementById("content").style.display = "none";
-        return;
-    }
+//    if (!createjs.Sound.initializeDefaultPlugins()) {
+//        document.getElementById("error").style.display = "block";
+//        document.getElementById("content").style.display = "none";
+//        return;
+//    }
     canvas = document.getElementById("gameCanvas");
     stage = new createjs.Stage(canvas);
     //stage.autoClear = false;
