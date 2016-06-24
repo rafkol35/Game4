@@ -15,5 +15,9 @@ Letter.prototype.updateAll = function () {
 
 Letter.prototype.updateColor = function () {
     this.shape.graphics.clear();
-    this.shape.graphics.beginFill(settings.colors[this.c]).drawRect(0, 0, settings.sts["LetterWidth"], settings.sts["LetterHeight"]);    
+    if(settings.colors[this.c] === undefined){
+        this.shape.graphics.beginFill(settings.colors[-1]).drawRect(0, 0, settings.sts["LetterWidth"], settings.sts["LetterHeight"]);    
+    }else{
+        this.shape.graphics.beginFill(settings.colors[this.c]).drawRect(0, 0, settings.sts["LetterWidth"], settings.sts["LetterHeight"]);    
+    }
 };

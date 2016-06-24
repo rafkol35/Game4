@@ -38,7 +38,9 @@ function Settings() {
     
     this.colors[this.newLineCode] = this.canvasColor;;
     this.colors[this.spaceCode] = this.canvasColor; //'#ff0000';
-    
+    this.colors[-1] = this.canvasColor; //'#ff0000';
+//    console.log(this.colors);
+    //
     //this.colors['A'] = '#ff0000';
     //this.colors['B'] = '#00ff00';
     //this.colors['C'] = '#0000ff';
@@ -99,6 +101,12 @@ Settings.prototype.spaceColorChange = function (newColor) {
     cttaTextChanged2();
 };
 
+Settings.prototype.undefColorChange = function (newColor) {
+    this.colors[-1] = "#" + newColor;
+    $("#clrsmpUndef").css("background-color", this.colors[-1]);
+    cttaTextChanged2();
+};
+
 Settings.prototype.gradientFromColorChange = function (newColor) {
     this.gradientFromColor = "#" + newColor;
     $("#clrsmpGradientFrom").css("background-color", settings.gradientFromColor);
@@ -118,9 +126,7 @@ Settings.prototype.letterColorChange = function (wc, newColor) {
 
 Settings.prototype.randomizeColors = function () {
     for (var i in this.colors) {        
-        //console.log(i + " " + this.colors[i] + " " + this.newLineCode + " " + this.spaceCode);
-        if (i == this.newLineCode || i == this.spaceCode) {
-            //console.log("contine");
+        if (i == this.newLineCode || i == this.spaceCode || i == -1) {
             continue;
         }
         this.colors[i] = '#' + Math.floor(Math.random() * 16777215).toString(16); //this.colors2[Math.random() * this.colors2.length | 0];
@@ -260,6 +266,21 @@ function initSettings() {
         }
     });
 
+    // undef color
+    $("#colorpickerUndef").val(settings.colors[-1]);
+    $("#clrsmpUndef").css("background-color", settings.colors[-1]);
+
+    $('#colorpickerUndef').ColorPicker({
+        onSubmit: function (hsb, hex, rgb, el) {
+            settings.undefColorChange(hex);
+            $(el).val("#" + hex);
+            $(el).ColorPickerHide();
+        },
+        onBeforeShow: function () {
+            $(this).ColorPickerSetColor(this.value);
+        }
+    });
+    
     // gradient
     $("#colorpickerGradientFrom").val(settings.gradientFromColor);
     $("#clrsmpGradientFrom").css("background-color", settings.gradientFromColor);
