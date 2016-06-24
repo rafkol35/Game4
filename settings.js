@@ -61,7 +61,7 @@ function Settings() {
         //this.colors[i] = '#ff0000';
     }
     //±ÊÍ≥Û∂Òøº°∆ £”¶—Ø¨
-    this.sss = "Aa°±BbCc∆ÊDdEeFfGgHhIiJjKkLl£≥MmNn—ÒOo”ÛPpQqRrSs¶∂TtUuVvWwXxYyZzØø¨º0123456789.:,!?()";
+    this.sss = "Aa°±BbCc∆ÊDdEe ÍFfGgHhIiJjKkLl£≥MmNn—ÒOo”ÛPpQqRrSs¶∂TtUuVvWwXxYyZzØø¨º0123456789.:,!?()";
     for (var i = 0 ; i < this.sss.length ; ++i)
     {
         //console.log(String.fromCharCode(s.charCodeAt(i)));
