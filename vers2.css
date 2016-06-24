@@ -114,7 +114,32 @@ table#tableGradient, #tableColors2{
 
 table#tableColors {
     margin-top: 10px;
+    width: 100%;
 }
+
+table#tableColors td{
+    /*margin-top: 10px;*/
+    /*width: 100%;*/
+    padding: 1px 5px;
+    /*margin: 0px auto;*/
+}
+
+table#tableColors td.tdcleft{
+    /*padding: 1px 0px;*/
+    padding: 1px 1px;
+    text-align: right;
+}
+
+table#tableColors td.tdcmiddle{
+    padding: 1px 0px;
+}
+
+table#tableColors td.tdcright{
+    /*padding: 1px 0px;*/
+    padding: 1px 1px;
+    text-align: left;
+}
+
 
 div.clrsmp {
     width: 20px;
