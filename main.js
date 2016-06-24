@@ -135,14 +135,11 @@ function init() {
     ctta = $('#taCurrentText');
     ctta.on('input change keyup', cttaTextChanged);
     
-    //<table id="tableColors">
-    //<tr><td>0</td><td><div id="clrsmp48" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker48" value="ffffff" /></td></tr>
-    
-//    for (var i in settings.colors) {
-//        if (i === ' ' || i === '\n') continue;
-//        var cid = i.charCodeAt(0);        
-//        $('#tableColors tr:last').after('<tr><td>'+i+'</td><td><div id="clrsmp'+cid+'" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker'+cid+'" value="ffffff" /></td></tr>');
-//    }
+    for (var col in settings.colors) {
+        if (col == settings.newLineCode || col == settings.spaceCode) continue;
+        var cid = String.fromCharCode(col);        
+        $('#tableColors tr:last').after('<tr><td>'+cid+'</td><td><div id="clrsmp'+col+'" class="clrsmp"></div></td><td><input type="text" maxlength="6" size="6" id="colorpicker'+col+'" value="ffffff" /></td></tr>');
+    }
     
     initSettings();
 

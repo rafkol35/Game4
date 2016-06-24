@@ -60,3 +60,24 @@ EasingFunctions = {
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+function hex2rgb(hexStr) {
+    // note: hexStr should be #rrggbb
+    var hex = parseInt(hexStr.substring(1), 16);
+    var r = (hex & 0xff0000) >> 16;
+    var g = (hex & 0x00ff00) >> 8;
+    var b = hex & 0x0000ff;
+    return [r, g, b];
+}
+
+function rgb2hex(rgb) {
+    //console.log(rgb);
+    rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+    function hex(x) {
+        return ("0" + parseInt(x).toString(16)).slice(-2);
+    }
+    return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+    //var res = "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+    //console.log(res);
+    //return res;
+}

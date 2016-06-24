@@ -4,27 +4,6 @@
  * and open the template in the editor.
  */
 
-function hex2rgb(hexStr) {
-    // note: hexStr should be #rrggbb
-    var hex = parseInt(hexStr.substring(1), 16);
-    var r = (hex & 0xff0000) >> 16;
-    var g = (hex & 0x00ff00) >> 8;
-    var b = hex & 0x0000ff;
-    return [r, g, b];
-}
-
-function rgb2hex(rgb) {
-    console.log(rgb);
-    rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-    function hex(x) {
-        return ("0" + parseInt(x).toString(16)).slice(-2);
-    }
-    return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
-    //var res = "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
-    //console.log(res);
-    //return res;
-}
-//0123456789
 function Settings() {
     //constructor(){
     console.log("Settings::constructor");
@@ -75,9 +54,9 @@ function Settings() {
         //console.log(i);
         //this.colors[String.fromCharCode(i)] = '#ff0000';
     }
-    for (var i = '0'.charCodeAt(0) ; i <= '9'.charCodeAt(0) ; ++i) {
+    for (var i = '0'.charCodeAt(0) ; i <= '1'.charCodeAt(0) ; ++i) {
         //console.log(String.fromCharCode(i));
-        //this.colors[""+String.fromCharCode(i)] = '#ff0000';
+        this.colors[i] = '#ff0000';
     }
 
     var s = "±æê³ó¶ñ¿¼¡ÆÊ£Ó¦Ñ¯¬";
@@ -150,10 +129,8 @@ Settings.prototype.randomizeColors = function () {
 
 Settings.prototype.fillColorsWithGradient = function () {
     var from = hex2rgb(this.gradientFromColor);
-    //console.log(from);
     var to = hex2rgb(this.gradientToColor);
-    //console.log(to);
-
+    
     var numColors = 90 - 65;
 
     var rFrom = from[0];
@@ -161,25 +138,8 @@ Settings.prototype.fillColorsWithGradient = function () {
     var bFrom = from[2];
 
     var rdiff = to[0] - from[0];
-//        if( to[0] > from[0] ) rdiff = to[0] - from[0];
-//        else{ 
-//            rdiff = from[0] - to[0];
-//            rFrom = to[0];
-//        }
-
     var gdiff = to[1] - from[1];
-//        if( to[1] > from[1] ) gdiff = to[1] - from[1];
-//        else { 
-//            gdiff = from[1] - to[1];
-//            gFrom = to[1];
-//        }
-
     var bdiff = to[2] - from[2];
-//        if( to[2] > from[2] ) bdiff = to[2] - from[2];
-//        else {
-//            bdiff = from[2] - to[2];
-//            bFrom = to[2];
-//        }
 
     var rStep = rdiff / numColors;
     var gStep = gdiff / numColors;
@@ -189,9 +149,7 @@ Settings.prototype.fillColorsWithGradient = function () {
     for (var i = 65; i <= 90; ++i)
     {
         var rgbStr = "rgb(" + Math.round(rFrom + cntr * rStep) + "," + Math.round(gFrom + cntr * gStep) + "," + Math.round(bFrom + cntr * bStep) + ")";
-        //console.log( rgb2hex(rgbStr) );
         this.colors[i] = rgb2hex(rgbStr);
-        //this.colors[i] = '#'+Math.floor(Math.random()*16777215).toString(16);
         cntr++;
     }
 };
